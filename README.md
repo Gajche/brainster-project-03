@@ -55,6 +55,8 @@ A web-based platform for the **Еволуција на Сонот** arts and cul
 - Review, approve, or reject pending applications (current year only - past years are read-only)
 - Send a custom message to the artist on approval/rejection
 - Search applications by name, surname, email, and phone
+- **Soft Delete & Data Recovery**: Applications can be safely removed from active views without permanent deletion.
+- **Database Restoration**: Supports full recovery of records by reverting the `deleted_at` timestamp to `null`.
 
 ---
 
@@ -373,6 +375,8 @@ The admin panel is accessible at `/admin` and is **not linked** in the public na
 5. Choose **Одобри** or **Одбиј**, write a message, and submit
 6. The artist receives an email automatically
 7. Only current-year applications can be actioned - past years are read-only
+8. **Safe Deletion**: Applications can be soft-deleted to keep the dashboard clean while preserving the data.
+9. **Restoration**: To restore a deleted application, the `deleted_at` column in the database must be reset to `null`.
 
 ---
 
@@ -607,9 +611,11 @@ You can use the default credentials listed to explore the admin panel.
 - CSRF protection on all forms
 - Rate limiting on the artist application route (3 submissions per IP per hour)
 - Mass assignment protection via `$fillable` on all models
-- PDF-only file uploads enforced on both frontend (JS) and backend (Laravel validation + MIME check)
+- PDF, DOCX, DOC file uploads enforced on both frontend (JS) and backend (Laravel validation + MIME check)
 - Year restriction enforced server-side - admins cannot action past-year applications
 - All errors handled with `try-catch` blocks and `Log::error()` logging
+- **Soft Deletes**: Implemented to prevent accidental data loss; records are kept in the database but hidden from the UI.
+- **Data Recovery**: Built-in support for reverting deletions via database-level restoration (`deleted_at = null`).
 
 ---
 

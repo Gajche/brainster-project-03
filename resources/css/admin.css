@@ -1,0 +1,135 @@
+/* resources/css/admin.css */
+
+/* Bootstrap 5.3.8 - admin panel only */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap");
+
+/* -- Admin base -- */
+body {
+    font-family: "Fira Sans", sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* -- Admin Sidebar -- */
+.admin-sidebar {
+    min-height: 100vh;
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 2rem 0;
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-sidebar .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.admin-sidebar .sidebar-brand h5 {
+    color: #f5c842;
+    font-weight: 700;
+    margin: 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.admin-sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 0;
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff !important;
+}
+
+/* -- Admin Main -- */
+.admin-main {
+    margin-left: 250px;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.admin-topbar {
+    background: #fff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-content {
+    padding: 2rem 1.5rem;
+}
+
+/* -- Stat Cards -- */
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border-left: 4px solid #3a6fd8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.stat-card.pending {
+    border-color: #ffc107;
+}
+.stat-card.approved {
+    border-color: #28a745;
+}
+.stat-card.rejected {
+    border-color: #dc3545;
+}
+.stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+.stat-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* -- Status Badges -- */
+.badge-pending {
+    background-color: #ffc107;
+    color: #000;
+}
+.badge-approved {
+    background-color: #28a745;
+    color: #fff;
+}
+.badge-rejected {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* -- Responsive admin -- */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        width: 100%;
+        position: relative;
+        min-height: auto;
+    }
+    .admin-main {
+        margin-left: 0;
+    }
+}

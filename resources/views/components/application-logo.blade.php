@@ -1,0 +1,1 @@
+<img src="{{ asset('storage/images/nav-logo.svg') }}" {{ $attributes->merge(['class' => 'h-20 w-auto']) }} alt="Logo">

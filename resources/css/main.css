@@ -1,0 +1,232 @@
+/* resources/css/main.css */
+
+/* -- Google Fonts -- */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap");
+
+/* Tailwind */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+@import "tailwindcss";
+
+@theme {
+    /* Custom Colors */
+    --color-cream: #f5f0e8;
+    --color-ev-blue: #3a6fd8;
+    --color-ev-blue-dark: #2a5abf;
+    --color-ev-blue-light: #c8d8f5;
+    --color-ev-yellow: #f5c842;
+    --color-topo-blue: #5b8db8;
+    --color-ev-dark: #000000;
+
+    /* Custom Breakpoint */
+    --breakpoint-xs: 425px;
+
+    /* Custom Font Family */
+    --font-sans:
+        "Fira Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+/* Custom base overrides */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        @apply bg-cream text-ev-dark overflow-x-hidden;
+        font-family: "Fira Sans", sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Fira Sans", sans-serif;
+    }
+}
+
+/* Custom components */
+@layer components {
+    /* Nav gradient button */
+    .btn-prijavi-nav {
+        background: linear-gradient(90deg, #1488cc 0%, #2b32b2 100%);
+        @apply inline-flex items-center justify-center text-white font-medium
+              rounded-[10px] transition-opacity duration-200 no-underline;
+    }
+    .btn-prijavi-nav:hover {
+        @apply opacity-90 text-white;
+    }
+
+    /* Hero topo background - complex background needs CSS */
+    .hero-topo-bg {
+        background-color: #5b8db8;
+        background-image: url("/storage/images/topo-pattern.svg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .nav-logo-img {
+        transform: rotate(-15deg);
+        transform-origin: center center;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    /* Video overlay */
+    .video-overlay::before {
+        content: "";
+        @apply absolute inset-0 bg-black/35;
+    }
+
+    /* Artist card gradient overlay */
+    .artist-overlay {
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    }
+
+    /* Form input underline style (work-with-us form) */
+    .input-underline {
+        @apply border-0 border-b-2 border-gray-300 rounded-none bg-transparent
+              px-0 py-2 focus:border-ev-blue focus:ring-0 focus:outline-none
+              transition-colors duration-200 w-full font-sans;
+    }
+    .input-underline:focus {
+        background: transparent;
+    }
+
+    /* Validation states */
+    .field-invalid {
+        @apply border-b-red-500;
+    }
+    .field-valid {
+        @apply border-b-green-500;
+    }
+    .field-error-msg {
+        @apply text-red-500 text-xs mt-1;
+    }
+}
+
+@layer utilities {
+    /* Dandelion responsive positioning */
+    .dandelion-wrap {
+        position: absolute;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 50;
+
+        /* Mobile */
+        left: 8px;
+        top: -80px;
+        width: 120px;
+    }
+
+    @media (min-width: 640px) {
+        /* Tablet */
+        .dandelion-wrap {
+            left: 8px;
+            top: -86px;
+            width: 140px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        /* Desktop */
+        .dandelion-wrap {
+            /* left: 150px; */
+            /* top: 0px; */
+            /* width: 220px; */
+            display: block; /* Removed display: none */
+            left: 0; /* Starts at the edge of the px-6 container */
+            top: -86px; /* Pulls it up into the navbar area */
+            width: 200px; /* Size on desktop */
+        }
+    }
+}
+
+/* -- Footer Dandelion Positioning -- */
+.dandelion-footer-wrap {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+
+    /* Mobile Defaults */
+    left: 20px;
+    top: -64px; /* Pulls it up over the border */
+    width: 60px;
+}
+
+@media (min-width: 768px) {
+    /* Tablet */
+    .dandelion-footer-wrap {
+        left: 40px;
+        top: -32px;
+        width: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Desktop - Matching your uploaded image */
+    .dandelion-footer-wrap {
+        left: 150px; /* Or use a fixed px value if you want it aligned with the container */
+        top: -36px;
+        width: 80px;
+        overflow: hidden;
+    }
+}
+
+/* Events */
+
+.event-card {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+/* The front-most card */
+.event-card.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 30;
+}
+
+/* The first card peeking behind */
+.event-card.prev-stack {
+    opacity: 0.8;
+    transform: translateY(-30px) scale(0.95);
+    z-index: 20;
+}
+
+/* The second card peeking further behind */
+.event-card.back-stack {
+    opacity: 0.4;
+    transform: translateY(-60px) scale(0.9);
+    z-index: 10;
+}
+
+/* carousel */
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-marquee {
+    display: flex;
+    /* Adjust time (40s) to change the speed */
+    animation: marquee 40s linear infinite;
+}

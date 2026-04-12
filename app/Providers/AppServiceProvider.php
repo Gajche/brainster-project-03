@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+// This line below is the one you are missing!
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,10 +20,13 @@ class AppServiceProvider extends ServiceProvider
 	 * Bootstrap any application services.
 	 */
 	public function boot(): void
-    {
-        // This forces all generated links (CSS, JS, Images) to use https
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
-    }
+	{
+		/**
+		 * Forces all generated links (CSS, JS, Images) to use https 
+		 * when the app is running on Railway (production).
+		 */
+		if (config('app.env') === 'production') {
+			URL::forceScheme('https');
+		}
+	}
 }

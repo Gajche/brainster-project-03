@@ -21,7 +21,7 @@
     --color-ev-dark: #000000;
 
     /* Custom Breakpoint */
-    --breakpoint-xs: 425px;
+    --breakpoint-xs: 375px;
 
     /* Custom Font Family */
     --font-sans:
@@ -69,7 +69,7 @@
 
     /* Hero topo background - complex background needs CSS */
     .hero-topo-bg {
-        background-color: #5b8db8;
+        /* background-color: #5b8db8; */
         background-image: url("/storage/images/topo-pattern.svg");
         background-size: cover;
         background-position: center;
@@ -160,9 +160,9 @@
     overflow: hidden;
 
     /* Mobile Defaults */
-    left: 20px;
+    left: 16px;
     top: -64px; /* Pulls it up over the border */
-    width: 60px;
+    width: 40px;
 }
 
 @media (min-width: 768px) {

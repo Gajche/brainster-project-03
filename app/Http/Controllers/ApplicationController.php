@@ -38,14 +38,25 @@ class ApplicationController extends Controller
 
 			// Send confirmation email to artist - wrapped in try-catch
 			// so mail failure does not roll back the application
+			// try {
+			// 	Mail::to($application->email)->send(new ApplicationReceived($application));
+			// } catch (\Throwable $mailException) {
+			// 	Log::error('Failed to send ApplicationReceived email', [
+			// 		'application_id' => $application->id,
+			// 		'error'          => $mailException->getMessage(),
+			// 	]);
+			// 	// Do NOT re-throw - application is saved, just log the mail failure
+			// }
+
+			// ----------------------
+
 			try {
-				Mail::to($application->email)->send(new ApplicationReceived($application));
+				Mail::to($application->email)
+					->send(new ApplicationReceived($application));
 			} catch (\Throwable $mailException) {
-				Log::error('Failed to send ApplicationReceived email', [
-					'application_id' => $application->id,
-					'error'          => $mailException->getMessage(),
+				Log::error('Mail failed', [
+					'error' => $mailException->getMessage(),
 				]);
-				// Do NOT re-throw - application is saved, just log the mail failure
 			}
 
 			return redirect()->route('work-with-us')

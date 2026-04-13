@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-// This line below is the one you are missing!
 use Illuminate\Support\Facades\URL;
+
+// ✅ ADD THESE (missing)
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,12 +25,16 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		/**
-		 * Forces all generated links (CSS, JS, Images) to use https 
-		 * when the app is running on Railway (production).
-		 */
+		// Force HTTPS on Railway (production)
 		if (config('app.env') === 'production') {
 			URL::forceScheme('https');
 		}
+
+		// ✅ Brevo mailer
+		Mail::extend('brevo', function () {
+			return Transport::fromDsn(
+				'brevo+api://default:' . env('BREVO_API_KEY') . '@default'
+			);
+		});
 	}
 }

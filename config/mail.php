@@ -14,7 +14,7 @@ return [
     |
     */
 
-	'default' => env('MAIL_MAILER', 'mailtrap-sdk'),
+	'default' => env('MAIL_MAILER', 'smtp'),
 
 	/*
     |--------------------------------------------------------------------------
@@ -99,6 +99,10 @@ return [
 
 		'mailtrap-sdk' => [
 			'transport' => 'mailtrap-sdk',
+		],
+
+		'brevo' => [
+			'transport' => 'brevo',
 		],
 
 	],

@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
-// ✅ ADD THESE (missing)
+
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Transport\Dsn;
@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
 			URL::forceScheme('https');
 		}
 
-		// ✅ Brevo mailer
+		// Brevo mailer
 		Mail::extend('brevo', function () {
 			return Transport::fromDsn(
 				'brevo+api://default:' . env('BREVO_API_KEY') . '@default'

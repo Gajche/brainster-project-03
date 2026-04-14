@@ -20,7 +20,7 @@
 		<div class="relative h-[calc(100dvh-89px)] lg:h-[calc(100dvh-85px)] flex items-center bg-[#5B89A3] overflow-hidden">
 
 			<!-- Background Image -->
-			<div class="absolute inset-0 z-0">
+			<div class=" z-0">
 				<img
 					src="{{ asset('storage/images/art-city-hero.png') }}"
 					loading="lazy"

@@ -110,6 +110,7 @@ return [
 
 		'sendgrid' => [
 			'transport' => 'sendgrid',
+			'key' => config('services.sendgrid.key'),
 		],
 
 	],

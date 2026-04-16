@@ -17,9 +17,10 @@
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full lg:px-6 pointer-events-none flex">
 		<div class="ml-auto w-full lg:w-[60%]">
 			<img
-				src="{{ asset('storage/images/hero-face.png') }}"
-				loading="lazy"
+				src="{{ asset('storage/images/hero-face.webp') }}"
 				alt="hero"
+				fetchpriority="high"
+				decoding="async"
 				class="w-full h-auto object-contain lg:object-top-right">
 		</div>
 	</div>
@@ -194,7 +195,12 @@ $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO'; // 
 				class="event-card absolute inset-0"
 				:class="getCardClass({{ $index }})">
 				<div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
-					<img src="{{ asset($event['image']) }}" alt="{{ $event['title'] }}" class="w-full h-full object-cover">
+					<img 
+						src="{{ asset($event['image']) }}" 
+						alt="{{ $event['title'] }}" 
+						loading="lazy"
+						decoding="async"
+						class="w-full h-full object-cover">
 
 					{{-- Info Overlay --}}
 					<div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
@@ -264,8 +270,11 @@ $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO'; // 
 				<div class="inline-block pr-4">
 					<div class="w-60 md:w-70 aspect-[1/1.3] rounded-3xl overflow-hidden shadow-sm">
 						<a href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
-							<img src="{{ asset('storage/images/insta-' . $i . '.svg') }}"
+							<img 
+								src="{{ asset('storage/images/insta-' . $i . '.svg') }}"
 								alt="Instagram пост {{ $i }}"
+								loading="lazy"
+								decoding="async"
 								class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
 						</a>
 					</div>

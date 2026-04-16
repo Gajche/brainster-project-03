@@ -22,9 +22,10 @@
 			<!-- Background Image -->
 			<div class="absolute inset-0 z-0">
 				<img
-					src="{{ asset('storage/images/art-city-hero.png') }}"
-					loading="lazy"
+					src="{{ asset('storage/images/art-city-hero.webp') }}"
 					alt="Art City Topo Background"
+					fetchpriority="high"
+					decoding="async"
 					class="w-full h-full object-cover">
 			</div>
 
@@ -153,17 +154,21 @@
 			<div class="flex animate-marquee whitespace-nowrap">
 				@php
 				$artists = [
-				['name' => 'ЛЕНА ЈАРИЌ', 'img' => 'artist-1.png'],
-				['name' => 'МИХАИЛ ПЕТРОВ', 'img' => 'artist-2.png'],
-				['name' => 'АЛБА НОТО', 'img' => 'artist-3.png'],
-				['name' => 'ЛЕОН КРИСТО', 'img' => 'artist-4.png'],
+				['name' => 'ЛЕНА ЈАРИЌ', 'img' => 'artist-1.webp'],
+				['name' => 'МИХАИЛ ПЕТРОВ', 'img' => 'artist-2.webp'],
+				['name' => 'АЛБА НОТО', 'img' => 'artist-3.webp'],
+				['name' => 'ЛЕОН КРИСТО', 'img' => 'artist-4.webp'],
 				];
 				@endphp
 				@foreach($artists as $artist)
 				<div class="inline-block px-2">
 					<div class="group relative rounded-3xl overflow-hidden
                         w-60 md:w-70 aspect-[1/1.3] cursor-pointer">
-						<img src="{{ asset('storage/images/' . $artist['img']) }}"
+						<img 
+							src="{{ asset('storage/images/' . $artist['img']) }}"
+							loading="lazy"
+							alt="artists-name"
+							decoding="async"
 							class="w-full h-full object-cover transition-transform
                       duration-500 ease-out group-hover:scale-110">
 						<div class="absolute inset-0 bg-linear-to-t from-black/20
@@ -221,7 +226,10 @@
             {{ $i === 4 ? 'lg:-mr-12 md:-mr-8' : '' }}
         ">
 				<img
-					src="{{ asset('storage/images/art-city-' . $i . '.png') }}"
+					src="{{ asset('storage/images/art-city-' . $i . '.webp') }}"
+					alt="art-city"
+					loading="lazy"
+					decoding="async"
 					class="w-full h-full object-contain">
 		</div>
 

@@ -33,7 +33,11 @@
 				class="event-card absolute inset-0"
 				:class="getCardClass({{ $index }})">
 				<div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
-					<img src="{{ asset($item['image']) }}" alt="{{ $item['title'] }}" class="w-full h-full object-cover">
+					<img src="{{ asset($item['image']) }}" 
+								alt="{{ $item['title'] }}"
+								loading="lazy"
+								decoding="async"
+								class="w-full h-full object-cover">
 
 					{{-- Info Overlay --}}
 					<div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
@@ -88,8 +92,10 @@
 		{{-- Edition 3 --}}
 		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-3.png') }}"
+				<img src="{{ asset('storage/images/edition-3.webp') }}"
 					alt="Еволуција на Сонот 3"
+					loading="lazy"
+					decoding="async"
 					class="w-full h-full object-cover">
 			</div>
 
@@ -115,8 +121,10 @@
 		{{-- Edition 2 - (Matches the Image Layout) --}}
 		<div class="flex flex-col md:flex-row-reverse items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-2.png') }}"
+				<img src="{{ asset('storage/images/edition-2.webp') }}"
 					alt="Еволуција на Сонот 2"
+					loading="lazy"
+					decoding="async"
 					class="w-full h-full object-cover">
 			</div>
 
@@ -144,8 +152,10 @@
 		{{-- Edition 1 --}}
 		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-1.png') }}"
+				<img src="{{ asset('storage/images/edition-1.webp') }}"
 					alt="Еволуција на Сонот 1"
+					loading="lazy"
+					decoding="async"
 					class="w-full h-full object-cover">
 			</div>
 

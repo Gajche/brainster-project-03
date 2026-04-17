@@ -18,7 +18,7 @@
 		<nav class="admin-sidebar">
 			<div class="sidebar-brand">
 				<h5>Еволуција<br>на Сонот</h5>
-				<small class="text-muted" style="font-size:0.7rem;">Администрација</small>
+				<small class="text-white">Администрација</small>
 			</div>
 			<ul class="nav flex-column">
 				<li class="nav-item">

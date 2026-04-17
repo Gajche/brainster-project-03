@@ -1,1 +1,0 @@
-web: php artisan migrate --force && php artisan storage:link --force && php -c php.ini -S 0.0.0.0:$PORT -t public

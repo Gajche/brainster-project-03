@@ -93,76 +93,79 @@
 
 {{-- VIDEO SECTION via alpine.js --}}
 @php
-$videoBg = asset('storage/images/video-bg.svg');
-// Change these to your actual links
-$videoType = 'youtube'; // 'youtube' or 'local'
-$videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO'; // For local: asset('storage/video/promo.mp4')
+    $videoBg = asset('storage/images/video-bg.svg');
+    
+    // SWITCHING LOGIC: 
+    // To use YouTube: set type to 'youtube' and use the /embed/ link.
+    // To use Local: set type to 'local' and use the asset() link.
+    
+    $videoType = 'youtube'; // Change to 'youtube' to switch
+    // $videoUrl = asset('storage/video/video.mp4'); 
+    
+    
+    $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO';
 @endphp
 
-<div x-data="{ open: false }" class="relative z-10 max-w-7xl mx-auto px-6 py-6">
+<div class="relative z-10 max-w-7xl mx-auto px-6 py-6" x-data="{ playing: false }">
+    
+    {{-- Main Placeholder Card --}}
+    <div class="relative rounded-lg overflow-hidden min-h-125 flex flex-col items-center justify-center bg-[#33322f] shadow-xl">
+        
+        {{-- LAYER 1: The Poster/Placeholder (Visible by default) --}}
+        <div x-show="!playing" 
+              class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-500"
+              style="background-image: url('{{ $videoBg }}');">
+            
+            {{-- Play Button --}}
+            <button @click="playing = true"
+                    class="relative z-30 w-24 h-24 md:w-37.5 md:h-37.5 rounded-full border-[3px] border-white/80 bg-white/15 flex items-center justify-center py-8 hover:scale-110 hover:bg-white/25 transition-all duration-300 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="white">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
 
-	{{-- Main Placeholder Card --}}
-	<div class="relative rounded-lg overflow-hidden min-h-125 flex flex-col items-center justify-center bg-[#c8b89a] bg-cover bg-center"
-		style="background-image: url('{{ $videoBg }}');">
+            {{-- Project Titles --}}
+            {{-- <div class="relative z-10 text-center mt-4">
+                <h2 class="text-2xl md:text-5xl lg:text-5xl font-black uppercase tracking-widest text-white">
+                    Еволуција на Сонот
+                </h2>
+                <p class="text-white font-black uppercase tracking-widest text-xl md:text-2xl">Ден 2</p>
+            </div> --}}
 
-		{{-- Play Button --}}
-		<button @click="open = true"
-			class="relative z-10 w-24 h-24 md:w-37.5 md:h-37.5 rounded-full border-[3px] border-white/80 bg-white/15 flex items-center justify-center py-8 hover:scale-110 hover:bg-white/25 transition-all duration-300">
-			<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="white">
-				<path d="M8 5v14l11-7z" />
-			</svg>
-		</button>
+            {{-- Overlay Gradient --}}
+            <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+        </div>
 
-		<!-- <div class="relative z-10 text-center ">
-			<h2 class="text-2xl md:text-5xl lg:text-5xl font-black uppercase tracking-widest text-white">
-				Еволуција на Сонот
-			</h2>
-			<p class="text-white font-black uppercase tracking-widest text-xl md:text-2xl ">Ден 2</p>
-		</div> -->
+        {{-- LAYER 2: The Player (Injected only when 'playing' is true) --}}
+        <template x-if="playing">
+            <div class="absolute inset-0 z-10 w-full h-full bg-black">
+                @if($videoType === 'youtube')
+                    <iframe class="w-full h-full"
+                            src="{{ $videoUrl }}?autoplay=1&rel=0"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                @else
+                    <video controls autoplay class="w-full h-full object-cover">
+                        <source src="{{ $videoUrl }}" type="video/mp4">
+                        Вашиот прелистувач не поддржува видео.
+                    </video>
+                @endif
+            </div>
+        </template>
 
-		{{-- Overlay Gradient to make text pop --}}
-		<div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
-	</div>
+        {{-- Close/Stop Button --}}
+        <button x-show="playing" 
+                @click="playing = false" 
+                class="absolute top-6 right-6 z-40 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+                title="Затвори видео">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
 
-	{{-- VIDEO MODAL (The Player) --}}
-	<template x-teleport="body">
-		<div x-show="open"
-			x-transition:opacity
-			class="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4 md:p-10"
-			@keydown.escape.window="open = false"
-			style="display: none;"> {{-- Prevent flicker on load --}}
-
-			{{-- Close Button --}}
-			<button @click="open = false" class="absolute top-6 right-6 text-white hover:text-gray-300 z-110">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
-
-			{{-- Video Wrapper --}}
-			<div class="w-full max-w-5xl aspect-video bg-black shadow-2xl rounded-lg overflow-hidden" @click.away="open = false">
-
-				@if($videoType === 'youtube')
-				<template x-if="open">
-					<iframe class="w-full h-full"
-						src="{{ $videoUrl }}?autoplay=1"
-						frameborder="0"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						allowfullscreen>
-					</iframe>
-				</template>
-				@else
-				<template x-if="open">
-					<video controls autoplay class="w-full h-full">
-						<source src="{{ $videoUrl }}" type="video/mp4">
-						Вашиот прелистувач не поддржува видео.
-					</video>
-				</template>
-				@endif
-
-			</div>
-		</div>
-	</template>
+    </div>
 </div>
 
 {{-- ПРЕТХОДНИ НАСТАНИ --}}

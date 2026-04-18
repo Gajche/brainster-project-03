@@ -126,14 +126,24 @@
                         font-bold text-sm text-right leading-snug z-10">
 				Кавадарци<br>5-15 Август
 			</div>
-			<iframe
+
+					{{-- Map Image --}}
+				<img
+					src="{{ asset('storage/images/art-city-map.svg') }}"
+					loading="lazy"
+					decoding="async"
+					alt="Art City Map"
+					class="w-full h-full object-cover">
+
+			{{-- <iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46982.76!2d22.0069!3d41.4330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135757e7e2323f5d%3A0x400dc5ad8f7a6b0!2sKavadarci%2C%20North%20Macedonia!5e0!3m2!1sen!2smk!4v1620000000000"
 				width="100%" height="450"
 				style="border:0; display:block;"
 				allowfullscreen loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
 				title="Кавадарци карта">
-			</iframe>
+			</iframe> --}}
+			
 		</div>
 	</div>
 

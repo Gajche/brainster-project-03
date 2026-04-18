@@ -21,7 +21,7 @@
     --color-ev-dark: #000000;
 
     /* Custom Breakpoint */
-    --breakpoint-xs: 375px;
+    --breakpoint-xs: 320px;
 
     /* Custom Font Family */
     --font-sans:
@@ -55,6 +55,9 @@
     }
 }
 
+/* forms plugin */
+@plugin "@tailwindcss/forms";
+
 /* Custom components */
 @layer components {
     /* Nav gradient button */
@@ -70,9 +73,9 @@
     /* Hero topo background - complex background needs CSS */
     .hero-topo-bg {
         /* background-color: #5b8db8; */
-        background-image: url("/storage/images/topo-pattern.svg");
-        background-size: cover;
-        background-position: center;
+        /* background-image: url("/storage/images/topo-pattern.svg"); */
+        /* background-size: cover; */
+        /* background-position: center; */
     }
 
     .nav-logo-img {

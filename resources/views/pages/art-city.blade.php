@@ -121,7 +121,7 @@
 			Мапа
 		</h2>
 
-		<div class="relative rounded-xl overflow-hidden shadow-lg">
+		<div class="relative rounded-xl overflow-hidden">
 			<div class="absolute top-4 right-4 bg-white/90 px-3 py-2 rounded-lg
                         font-bold text-sm text-right leading-snug z-10">
 				Кавадарци<br>5-15 Август
@@ -143,7 +143,7 @@
 				referrerpolicy="no-referrer-when-downgrade"
 				title="Кавадарци карта">
 			</iframe> --}}
-			
+
 		</div>
 	</div>
 

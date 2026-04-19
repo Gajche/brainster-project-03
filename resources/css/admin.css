@@ -1,18 +1,18 @@
 /* resources/css/admin.css */
 
-/* Bootstrap 5.3.8 - admin panel only */
+/* Bootstrap 5.3.8 */
 @import "bootstrap/dist/css/bootstrap.min.css";
 
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap");
 
-/* -- Admin base -- */
+/* Base Styles */
 body {
     font-family: "Fira Sans", sans-serif;
     background-color: #f8f9fa;
 }
 
-/* -- Admin Sidebar -- */
+/* Admin Sidebar (Desktop) */
 .admin-sidebar {
     min-height: 100vh;
     background-color: #1a1a2e;
@@ -27,13 +27,21 @@ body {
     flex-direction: column;
 }
 
-.admin-sidebar .sidebar-brand {
-    padding: 0 1.5rem 1.5rem;
+/* Mobile Sidebar (Offcanvas) */
+.admin-sidebar-mobile {
+    background-color: #1a1a2e !important;
+    width: 280px !important;
+}
+
+.admin-sidebar .sidebar-brand,
+.offcanvas-header {
+    padding: 1.5rem 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 1.5rem;
 }
 
-.admin-sidebar .sidebar-brand h5 {
+.admin-sidebar .sidebar-brand h5,
+.offcanvas-title {
     color: #f5c842;
     font-weight: 700;
     margin: 0;
@@ -42,27 +50,32 @@ body {
     letter-spacing: 0.08em;
 }
 
-.admin-sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.7) !important;
-    padding: 0.6rem 1.5rem;
-    font-size: 0.9rem;
+/* Shared Navigation Links */
+.admin-sidebar .nav-link,
+.admin-sidebar-mobile .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
     border-radius: 0;
-    transition:
-        background 0.2s,
-        color 0.2s;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
 }
 
 .admin-sidebar .nav-link:hover,
-.admin-sidebar .nav-link.active {
+.admin-sidebar .nav-link.active,
+.admin-sidebar-mobile .nav-link:hover,
+.admin-sidebar-mobile .nav-link.active {
     background-color: rgba(255, 255, 255, 0.08);
-    color: #fff !important;
+    color: #fff;
+    border-left: 4px solid #f5c842;
 }
 
-/* -- Admin Main -- */
+/* Admin Main Layout */
 .admin-main {
-    margin-left: 250px;
+    margin-left: 250px; /* Space for fixed sidebar on desktop */
     min-height: 100vh;
     background-color: #f8f9fa;
+    transition: margin 0.3s ease;
 }
 
 .admin-topbar {
@@ -78,7 +91,7 @@ body {
     padding: 2rem 1.5rem;
 }
 
-/* -- Stat Cards -- */
+/* Stat Cards */
 .stat-card {
     background: #fff;
     border-radius: 10px;
@@ -105,10 +118,9 @@ body {
     font-size: 0.85rem;
     color: #6c757d;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
-/* -- Status Badges -- */
+/* Status Badges */
 .badge-pending {
     background-color: #ffc107;
     color: #000;
@@ -122,14 +134,15 @@ body {
     color: #fff;
 }
 
-/* -- Responsive admin -- */
-@media (max-width: 768px) {
-    .admin-sidebar {
-        width: 100%;
-        position: relative;
-        min-height: auto;
-    }
+/* Responsive Breakpoints */
+@media (max-width: 991.98px) {
     .admin-main {
-        margin-left: 0;
+        margin-left: 0; /* Content takes full width on mobile/tablet */
+    }
+
+    .admin-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
 }

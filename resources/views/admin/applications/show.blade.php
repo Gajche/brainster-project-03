@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="row g-4">
-	{{-- Application details --}}
+	<!-- Application details -->
 	<div class="col-lg-7">
 		<div class="card border-0 shadow-sm mb-4">
 			<div class="card-header bg-white fw-bold d-flex justify-content-between align-items-center">
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 
-	{{-- Review form - only for pending current-year applications --}}
+	<!-- Review form - only for pending current-year applications -->
 	<div class="col-lg-5">
 		@if($application->isPending() && $application->isCurrentYear())
 		<div class="card border-0 shadow-sm">
@@ -93,7 +93,7 @@
 							Порака до уметникот
 						</label>
 						<textarea id="admin_response" name="admin_response"
-							class="form-control" rows="5"
+							class="form-control" rows="3"
 							placeholder="Внесете порака која ќе биде испратена до уметникот..."
 							required minlength="10">{{ old('admin_response') }}</textarea>
 						@error('admin_response')
@@ -102,7 +102,7 @@
 					</div>
 
 					<button type="submit" class="btn btn-primary w-100">
-						Испрати одлука
+						Испрати
 					</button>
 				</form>
 			</div>
@@ -118,7 +118,7 @@
 		</div>
 		@endif
 
-		<a href="{{ route('admin.applications.pending') }}" class="btn btn-link ps-0 mt-2">
+		<a href="{{ route('admin.applications.pending') }}" class="btn btn-secondary mt-3">
 			Назад кон листата
 		</a>
 	</div>

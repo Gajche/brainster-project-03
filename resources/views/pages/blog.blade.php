@@ -6,74 +6,74 @@
 
 {{-- LATEST NEWS HERO --}}
 <section class="relative py-6 bg-white" x-data="eventSlider()">
-	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
-		<div x-data class="dandelion-wrap pointer-events-none">
-			@include('partials.svg.dandelion')
-		</div>
-	</div>
+  <div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
+    <div x-data class="dandelion-wrap pointer-events-none">
+      @include('partials.svg.dandelion')
+    </div>
+  </div>
 
-	<div class="relative z-10 max-w-7xl mx-auto px-6">
-		<h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-16">
-			Најнови новости
-		</h2>
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-16">
+      Најнови новости
+    </h2>
 
-		{{-- Slider Wrapper --}}
-		<div class="relative w-full h-87.5 md:h-137.5 lg:h-162.5">
-			@php
-			// Data for the Blog section
-			$news = [
-			['title' => 'Еволуција на Сонот - 1', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-1.svg'],
-			['title' => 'Еволуција на Сонот - 2', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-2.svg'],
-			['title' => 'Еволуција на Сонот - 3', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-3.svg'],
-			];
-			@endphp
+    {{-- Slider Wrapper --}}
+    <div class="relative w-full h-87.5 md:h-137.5 lg:h-162.5 group">
+      
+      @php
+      $news = [
+        ['title' => 'Еволуција на Сонот - 1', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-1.svg'],
+        ['title' => 'Еволуција на Сонот - 2', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-2.svg'],
+        ['title' => 'Еволуција на Сонот - 3', 'location' => 'Скопје, Македонија', 'image' => 'storage/images/latest-news-3.svg'],
+      ];
+      @endphp
 
-			@foreach($news as $index => $item)
-			<div
-				class="event-card absolute inset-0"
-				:class="getCardClass({{ $index }})">
-				<div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
-					<img src="{{ asset($item['image']) }}" 
-								alt="{{ $item['title'] }}"
-								loading="lazy"
-								decoding="async"
-								class="w-full h-full object-cover">
+      {{-- Prev Button --}}
+      <button @click="prev()" 
+              class="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-ev-dark hover:text-white transition-all shadow-lg active:scale-95">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
 
-					{{-- Info Overlay --}}
-					<div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
-						<h5 class="font-bold text-base text-ev-dark mb-1">{{ $item['title'] }}</h5>
-						<small class="text-gray-600 text-xs flex items-center gap-1">
-							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="red">
-								<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-							</svg>
-							{{ $item['location'] }}
-						</small>
-					</div>
-				</div>
-			</div>
-			@endforeach
-		</div>
+      {{-- Next Button --}}
+      <button @click="next()" 
+              class="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-ev-dark hover:text-white transition-all shadow-lg active:scale-95">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
 
-		{{-- Navigation & Button --}}
-		<div class="flex justify-between items-center mt-6">
-			<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
-				Повеќе
-			</x-ui.button>
+      @foreach($news as $index => $item)
+      <div class="event-card absolute inset-0" :class="getCardClass({{ $index }})">
+        <div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
+          <img src="{{ asset($item['image']) }}" 
+                alt="{{ $item['title'] }}"
+                loading="lazy"
+                class="w-full h-full object-cover">
 
-			<div class="flex gap-3">
-				<button @click="prev()" class="w-12 h-12 rounded-full border border-ev-dark flex items-center justify-center hover:bg-ev-dark hover:text-white transition-all">
-					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-					</svg>
-				</button>
-				<button @click="next()" class="w-12 h-12 rounded-full border border-ev-dark flex items-center justify-center hover:bg-ev-dark hover:text-white transition-all">
-					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-					</svg>
-				</button>
-			</div>
-		</div>
-	</div>
+          {{-- Info Overlay --}}
+          <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
+            <h5 class="font-bold text-base text-ev-dark mb-1">{{ $item['title'] }}</h5>
+            <small class="text-gray-600 text-xs flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="red">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              {{ $item['location'] }}
+            </small>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+
+    {{-- Bottom Action Button --}}
+    <div class="flex justify-start mt-6">
+      <x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
+        Повеќе
+      </x-ui.button>
+    </div>
+  </div>
 </section>
 
 {{-- PREVIOUS EDITIONS --}}

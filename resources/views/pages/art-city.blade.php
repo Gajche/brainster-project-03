@@ -4,7 +4,7 @@
 
 @section('content')
 
-<!-- HERO TOPO -->
+{{-- HERO TOPO --}}
 <section class="relative bg-white overflow-visible">
 
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
@@ -17,9 +17,9 @@
 
 	<div class="max-w-7xl mx-auto lg:px-6">
 
-		<div class="relative h-[calc(100vh-89px)] lg:h-[calc(100dvh-85px)] flex items-center bg-[#5B89A3] overflow-hidden">
+		<div class="relative min-h-[calc(100vh-89px)] lg:h-[calc(100dvh-85px)] flex items-center overflow-hidden">
 
-			<!-- Background Image -->
+			{{-- Background Image --}}
 			<div class="absolute inset-0 z-0">
 				<img
 					src="{{ asset('storage/images/art-city-hero.webp') }}"
@@ -29,7 +29,7 @@
 					class="w-full h-full object-cover">
 			</div>
 
-			<!-- Content -->
+			{{-- Content --}}
 			<div class="relative z-10 w-full px-6 md:px-16">
 				<div class="max-w-4xl">
 					<h1 class="text-5xl font-semibold uppercase text-white mb-5">
@@ -46,7 +46,7 @@
 	</div>
 </section>
 
-<!-- НАШАТА ВИЗИЈА -->
+{{-- НАШАТА ВИЗИЈА --}}
 <section class="py-20 bg-cream">
 	<div class="max-w-4xl mx-auto px-6 text-center">
 		<h2 class="text-lg font-bold uppercase text-ev-dark mb-6">
@@ -106,7 +106,7 @@
 </section>
 
 
-<!-- МАПА -->
+{{-- МАПА --}}
 <section class="relative py-20 bg-cream overflow-visible">
 
 	{{-- Droplet --}}
@@ -121,20 +121,20 @@
 			Мапа
 		</h2>
 
-		<div class="relative rounded-xl overflow-hidden">
+		<div class="relative rounded-xl overflow-hidden ">
 			<div class="absolute top-4 right-4 bg-white/90 px-3 py-2 rounded-lg
                         font-bold text-sm text-right leading-snug z-10">
 				Кавадарци<br>5-15 Август
 			</div>
 
-					{{-- Map Image --}}
+				{{-- Map Image --}}
 				<img
 					src="{{ asset('storage/images/art-city-map.svg') }}"
 					loading="lazy"
 					decoding="async"
 					alt="Art City Map"
 					class="w-full h-full object-cover">
-
+			
 			{{-- <iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46982.76!2d22.0069!3d41.4330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135757e7e2323f5d%3A0x400dc5ad8f7a6b0!2sKavadarci%2C%20North%20Macedonia!5e0!3m2!1sen!2smk!4v1620000000000"
 				width="100%" height="450"
@@ -143,14 +143,13 @@
 				referrerpolicy="no-referrer-when-downgrade"
 				title="Кавадарци карта">
 			</iframe> --}}
-
 		</div>
 	</div>
 
 </section>
 
 
-<!-- УМЕТНИЦИ -->
+{{-- УМЕТНИЦИ --}}
 <section class="relative py-20 bg-cream overflow-visible">
 
 	{{-- Уметници content --}}
@@ -164,21 +163,17 @@
 			<div class="flex animate-marquee whitespace-nowrap">
 				@php
 				$artists = [
-				['name' => 'ЛЕНА ЈАРИЌ', 'img' => 'artist-1.webp'],
-				['name' => 'МИХАИЛ ПЕТРОВ', 'img' => 'artist-2.webp'],
-				['name' => 'АЛБА НОТО', 'img' => 'artist-3.webp'],
-				['name' => 'ЛЕОН КРИСТО', 'img' => 'artist-4.webp'],
+				['name' => 'ЛЕНА ЈАРИЌ', 'img' => 'artist-1.png'],
+				['name' => 'МИХАИЛ ПЕТРОВ', 'img' => 'artist-2.png'],
+				['name' => 'АЛБА НОТО', 'img' => 'artist-3.png'],
+				['name' => 'ЛЕОН КРИСТО', 'img' => 'artist-4.png'],
 				];
 				@endphp
 				@foreach($artists as $artist)
 				<div class="inline-block px-2">
 					<div class="group relative rounded-3xl overflow-hidden
                         w-60 md:w-70 aspect-[1/1.3] cursor-pointer">
-						<img 
-							src="{{ asset('storage/images/' . $artist['img']) }}"
-							loading="lazy"
-							alt="artists-name"
-							decoding="async"
+						<img src="{{ asset('storage/images/' . $artist['img']) }}"
 							class="w-full h-full object-cover transition-transform
                       duration-500 ease-out group-hover:scale-110">
 						<div class="absolute inset-0 bg-linear-to-t from-black/20
@@ -205,7 +200,7 @@
 
 
 
-<!-- ШТО МОЖЕШ ДА ОЧЕКУВАШ -->
+{{-- ШТО МОЖЕШ ДА ОЧЕКУВАШ --}}
 <section class="pt-20 pb-40 bg-cream relative">
 	<div class="max-w-7xl mx-auto px-6 overflow-visible">
 		<h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-10">
@@ -217,29 +212,30 @@
 			@for($i = 1; $i <= 5; $i++)
 				<div
 				class="
-            rounded-xl overflow-hidden relative 
+            rounded-xl overflow-hidden relative
 
             {{ $i === 3 ? 'col-span-2 md:col-span-2' : '' }}
 
             lg:h-95
 						md:h-55
+						{{-- xs:h-85 --}}
 						
             lg:flex-1
 						md:flex-1
+						{{-- xs:flex-1 --}}
 
             {{ $i === 3 ? 'lg:flex-[1.5] lg:z-20 md:flex-[1.5] md:z-20' : '' }}
 
             <!-- LEFT OVERLAP -->
+						{{-- {{ $i === 1 ? ' xs:-mr-7' : '' }} --}}
             {{ $i === 2 ? 'lg:-ml-12 md:-ml-8' : '' }}
 
             <!-- RIGHT OVERLAP -->
             {{ $i === 4 ? 'lg:-mr-12 md:-mr-8' : '' }}
+						{{-- {{ $i === 5 ? ' xs:-ml-8' : '' }} --}}
         ">
 				<img
 					src="{{ asset('storage/images/art-city-' . $i . '.webp') }}"
-					alt="art-city"
-					loading="lazy"
-					decoding="async"
 					class="w-full h-full object-contain">
 		</div>
 

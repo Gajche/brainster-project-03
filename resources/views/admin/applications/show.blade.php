@@ -77,8 +77,8 @@
 					@csrf
 
 					<div class="mb-3">
-						<label class="form-label fw-semibold">Одлука</label>
-						<select name="decision" class="form-select" required>
+						<label for="decision" class="form-label fw-semibold">Одлука</label>
+						<select id="decision" name="decision" class="form-select" required>
 							<option value="" disabled selected>- изберете -</option>
 							<option value="approved">✅ Одобри</option>
 							<option value="rejected">❌ Одбиј</option>

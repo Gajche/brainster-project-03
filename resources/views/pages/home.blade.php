@@ -4,8 +4,8 @@
 
 @section('content')
 
-{{-- -- HERO -- --}}
-<section class="relative lg:h-[calc(100dvh-85px)] flex items-center overflow-visible bg-cream">
+{{-- HERO --}}
+<section class="relative min-h-[calc(100vh-89px)] lg:h-[calc(100dvh-85px)] flex items-center overflow-visible bg-cream">
 
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
 		<div x-data class="dandelion-wrap pointer-events-none ">
@@ -35,10 +35,12 @@
 			<div class="absolute inset-0 lg:hidden -z-10 mx-0 px-0">
 				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"
 					class="w-full h-full object-fill"
-					alt="">
+					alt="bg-mobile"
+					loading="lazy"
+					decoding="async">
 			</div>
 
-			{{-- 2. Tablet SVG Background (Visible ONLY on 768px up to 1023px) --}}
+			{{-- Tablet SVG Background (Visible ONLY on 768px up to 1023px) --}}
 			<div class="absolute inset-0 hidden md:block lg:hidden -z-10">
 				@include('partials.svg.ipad-bg')
 			</div>
@@ -52,7 +54,7 @@
 				Еволуција на Сонот
 			</h1>
 
-			<p class="lg:text-base text-sm text-ev-dark max-w-115 mb-8">
+			<p class="lg:text-base xs:text-sm text-ev-dark max-w-115 mb-8">
 				Ако сакаш да бидеш дел и ти, приклучи се кон заедницата
 				што создава, соработува и ја обликува современата
 				културна сцена.
@@ -67,10 +69,10 @@
 	</div>
 </section>
 
-{{-- -- ЗА НАС -- --}}
-<section class="relative py-10 bg-cream"> {{-- Removed overflow-hidden so the blob can bleed upward --}}
+{{-- ЗА НАС --}}
+<section class="relative py-10 bg-cream">
 
-	<div class="hidden lg:block absolute left-0 -top-20 w-[35%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute left-0 -top-[5vw] w-[35%] pointer-events-none z-0">
 		@include('partials.svg.blueblob')
 	</div>
 
@@ -93,83 +95,101 @@
 
 {{-- VIDEO SECTION via alpine.js --}}
 @php
-    $videoBg = asset('storage/images/video-bg.svg');
-    
-    // SWITCHING LOGIC: 
-    // To use YouTube: set type to 'youtube' and use the /embed/ link.
-    // To use Local: set type to 'local' and use the asset() link.
-    
-    $videoType = 'youtube'; // Change to 'youtube' to switch
-    // $videoUrl = asset('storage/video/video.mp4'); 
-    
-    
-    $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO';
+    $videoType = 'local'; // 'local' or 'youtube'
+    $videoUrl = asset('storage/video/video-insta.mp4'); 
+
+		// $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO';
+
+    // Logic for YouTube Thumbnails vs Local Fragments
+    if ($videoType === 'youtube') {
+        preg_match('/(?:embed\/|v=)([\w-]+)/', $videoUrl, $matches);
+        $youtubeId = $matches[1] ?? '';
+        $posterUrl = "https://img.youtube.com/vi/{$youtubeId}/maxresdefault.jpg";
+    } else {
+        // Tells the browser to load the frame at 0.001 seconds
+        $videoUrlWithFragment = $videoUrl . '#t=0.001';
+    }
 @endphp
 
-<div class="relative z-10 max-w-7xl mx-auto px-6 py-6" x-data="{ playing: false }">
+<div class="relative z-10 max-w-7xl mx-auto px-6 py-6" 
+      x-data="{ 
+        playing: false,
+        toggleVideo() {
+            this.playing = !this.playing;
+            // If local video exists, control playback via reference
+            if (this.$refs.localVideo) {
+                this.playing ? this.$refs.localVideo.play() : this.$refs.localVideo.pause();
+            }
+        }
+    }">
     
-    {{-- Main Placeholder Card --}}
-    <div class="relative rounded-lg overflow-hidden min-h-125 flex flex-col items-center justify-center bg-[#33322f] shadow-xl">
+    <div class="relative rounded-lg overflow-hidden min-h-75 md:min-h-125 flex flex-col items-center justify-center bg-[#33322f] shadow-xl">
         
-        {{-- LAYER 1: The Poster/Placeholder (Visible by default) --}}
-        <div x-show="!playing" 
-              class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-500"
-              style="background-image: url('{{ $videoBg }}');">
-            
-            {{-- Play Button --}}
-            <button @click="playing = true"
-                    class="relative z-30 w-24 h-24 md:w-37.5 md:h-37.5 rounded-full border-[3px] border-white/80 bg-white/15 flex items-center justify-center py-8 hover:scale-110 hover:bg-white/25 transition-all duration-300 group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="white">
-                    <path d="M8 5v14l11-7z" />
-                </svg>
-            </button>
+        @if($videoType === 'youtube')
+            {{-- YOUTUBE MODE: Uses Thumbnail + Iframe Swap --}}
+            <div x-show="!playing" 
+                  class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-500"
+                  style="background-image: url('{{ $posterUrl }}');">
+                
+                <button @click="playing = true"
+                        class="relative z-30 w-24 h-24 md:w-32 md:h-32 rounded-full border-[3px] border-white/80 bg-white/15 flex items-center justify-center hover:scale-110 hover:bg-white/25 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="white">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                </button>
+                <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+            </div>
 
-            {{-- Project Titles --}}
-            {{-- <div class="relative z-10 text-center mt-4">
-                <h2 class="text-2xl md:text-5xl lg:text-5xl font-black uppercase tracking-widest text-white">
-                    Еволуција на Сонот
-                </h2>
-                <p class="text-white font-black uppercase tracking-widest text-xl md:text-2xl">Ден 2</p>
-            </div> --}}
-
-            {{-- Overlay Gradient --}}
-            <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
-        </div>
-
-        {{-- LAYER 2: The Player (Injected only when 'playing' is true) --}}
-        <template x-if="playing">
-            <div class="absolute inset-0 z-10 w-full h-full bg-black">
-                @if($videoType === 'youtube')
+            <template x-if="playing">
+                <div class="absolute inset-0 z-10 w-full h-full bg-black">
                     <iframe class="w-full h-full"
                             src="{{ $videoUrl }}?autoplay=1&rel=0"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                     </iframe>
-                @else
-                    <video controls autoplay class="w-full h-full object-cover">
-                        <source src="{{ $videoUrl }}" type="video/mp4">
-                        Вашиот прелистувач не поддржува видео.
-                    </video>
-                @endif
-            </div>
-        </template>
+                </div>
+            </template>
 
-        {{-- Close/Stop Button --}}
+        @else
+            {{-- LOCAL MODE: Uses the Video Element itself as the placeholder --}}
+            <div class="absolute inset-0 z-10 w-full h-full bg-black">
+                <video x-ref="localVideo"
+                        :controls="playing"
+                        playsinline
+                        preload="metadata"
+                        class="w-full h-full object-cover">
+                    <source src="{{ $videoUrlWithFragment }}" type="video/mp4">
+                    Вашиот прелистувач не поддржува видео.
+                </video>
+            </div>
+
+            {{-- Play Button Overlay for Local --}}
+            <div x-show="!playing" 
+                  class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/20 transition-opacity duration-500">
+                <button @click="toggleVideo()"
+                        class="relative z-30 w-24 h-24 md:w-32 md:h-32 rounded-full border-[3px] border-white/80 bg-white/15 flex items-center justify-center hover:scale-110 hover:bg-white/25 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="white">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                </button>
+            </div>
+        @endif
+
+        {{-- Close/Stop Button (Works for both) --}}
         <button x-show="playing" 
-                @click="playing = false" 
-                class="absolute top-6 right-6 z-40 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+                @click="toggleVideo()" 
+                class="absolute top-4 right-4 z-40 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
                 title="Затвори видео">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-
     </div>
 </div>
 
 {{-- ПРЕТХОДНИ НАСТАНИ --}}
-<section class="relative py-20 bg-white" x-data="eventSlider()">
+<section class="relative py-20 bg-cream" x-data="eventSlider()">
 
   {{-- Clouds --}}
   <div class="hidden lg:block absolute right-0 -top-65 w-[35%] pointer-events-none z-0">
@@ -220,7 +240,7 @@
                 class="w-full h-full object-cover">
 
           {{-- Info Overlay --}}
-          <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
+          <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white/80 uppercase">
             <h5 class="font-bold text-base text-ev-dark mb-1">{{ $event['title'] }}</h5>
             <small class="text-gray-600 text-xs flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="red">
@@ -288,9 +308,8 @@
 		</div>
 	</div>
 
-	{{-- SVGs (Blobs & Leaves) --}}
 	{{-- Blob 1 --}}
-	<div class="hidden lg:block absolute right-[40%] bottom-10 w-[15%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute right-[40%] bottom-[2.8vw] w-[15%] pointer-events-none z-0">
 		@include('partials.svg.insta-blob-1')
 	</div>
 	{{-- Blob 2 --}}

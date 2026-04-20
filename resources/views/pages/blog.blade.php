@@ -53,7 +53,7 @@
                 class="w-full h-full object-cover">
 
           {{-- Info Overlay --}}
-          <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white md:py-6 uppercase">
+          <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white/80  uppercase">
             <h5 class="font-bold text-base text-ev-dark mb-1">{{ $item['title'] }}</h5>
             <small class="text-gray-600 text-xs flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="red">
@@ -92,7 +92,7 @@
 		{{-- Edition 3 --}}
 		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-3.webp') }}"
+				<img src="{{ asset('storage/images/edition-3.png') }}"
 					alt="Еволуција на Сонот 3"
 					loading="lazy"
 					decoding="async"
@@ -118,10 +118,10 @@
 			</div>
 		</div>
 
-		{{-- Edition 2 - (Matches the Image Layout) --}}
+		{{-- Edition 2 --}}
 		<div class="flex flex-col md:flex-row-reverse items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-2.webp') }}"
+				<img src="{{ asset('storage/images/edition-2.png') }}"
 					alt="Еволуција на Сонот 2"
 					loading="lazy"
 					decoding="async"
@@ -152,7 +152,7 @@
 		{{-- Edition 1 --}}
 		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-1.webp') }}"
+				<img src="{{ asset('storage/images/edition-1.png') }}"
 					alt="Еволуција на Сонот 1"
 					loading="lazy"
 					decoding="async"
@@ -181,7 +181,7 @@
 	</div>
 </section>
 
-{{-- -- CTA -- --}}
+{{-- CTA --}}
 <section class="py-40 bg-cream text-center relative">
 
 	{{-- Clouds --}}
@@ -193,7 +193,7 @@
 		<h2 class="text-2xl md:text-4xl font-bold uppercase mb-6">
 			Сакаш да биде дел од нашиот колектив?
 		</h2>
-		{{-- 3. Bottom CTA Button (uses default size) --}}
+		{{-- Bottom CTA Button --}}
 		<x-ui.button href="{{ route('work-with-us') }}">
 			Пријави се
 		</x-ui.button>

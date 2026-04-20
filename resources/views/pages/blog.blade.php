@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- LATEST NEWS HERO --}}
-<section class="relative py-6 bg-white" x-data="eventSlider()">
+<section class="relative py-6 bg-cream" x-data="eventSlider()">
   <div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
     <div x-data class="dandelion-wrap pointer-events-none">
       @include('partials.svg.dandelion')
@@ -13,7 +13,7 @@
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6">
-    <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-16">
+    <h2 class="text-lg lg:text-3xl font-semibold uppercase text-center text-ev-dark mb-16">
       Најнови новости
     </h2>
 
@@ -79,106 +79,83 @@
 {{-- PREVIOUS EDITIONS --}}
 <section class="py-20 bg-cream relative">
 
-	{{-- Clouds --}}
-	<div class="hidden lg:block absolute left-0 -top-35 w-[70%] pointer-events-none z-0">
-		@include('partials.svg.cloudsleft1')
-	</div>
+  {{-- Clouds --}}
+  <div class="hidden lg:block absolute left-0 -top-35 w-[70%] pointer-events-none z-0">
+    @include('partials.svg.cloudsleft1')
+  </div>
 
-	<div class="max-w-6xl mx-auto px-6 relative z-10">
-		<h2 class="text-center text-lg font-bold uppercase tracking-wide text-ev-dark mb-12">
-			Погледни што се случуваше изминатите години
-		</h2>
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <h2 class="text-center text-lg lg:text-3xl font-bold uppercase tracking-wide text-ev-dark mb-12">
+      Погледни што се случуваше изминатите години
+    </h2>
 
-		{{-- Edition 3 --}}
-		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
-			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-3.png') }}"
-					alt="Еволуција на Сонот 3"
-					loading="lazy"
-					decoding="async"
-					class="w-full h-full object-cover">
-			</div>
+    @php
+      $editions = [
+          [
+              'id' => 3, 
+              'img' => 'edition-3.webp', 
+              'rev' => false,
+              'paragraphs' => [
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+              ]
+          ],
+          [
+              'id' => 2, 
+              'img' => 'edition-2.webp', 
+              'rev' => true,
+              'paragraphs' => [
+                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+              ]
+          ],
+          [
+              'id' => 1, 
+              'img' => 'edition-1.webp', 
+              'rev' => false,
+              'paragraphs' => [
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!',
+              ]
+          ],
+      ];
+    @endphp
 
-			<div class="flex-1 p-8 md:p-12 flex flex-col justify-center">
-				<h3 class="font-semibold text-2xl uppercase mb-6 ">
-					Еволуција на Сонот 3
-				</h3>
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
+    @foreach($editions as $edition)
+      <div class="flex flex-col {{ $edition['rev'] ? 'md:flex-row-reverse' : 'md:flex-row' }} items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
 
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
-				<div>
-					<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
-						Повеќе →
-					</x-ui.button>
-				</div>
-			</div>
-		</div>
+        {{-- Image Side --}}
+        <div class="w-full lg:w-[40%] md:w-[45%] shrink-0">
+          <img src="{{ asset('storage/images/' . $edition['img']) }}"
+            alt="Еволуција на Сонот {{ $edition['id'] }}"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover">
+        </div>
 
-		{{-- Edition 2 --}}
-		<div class="flex flex-col md:flex-row-reverse items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
-			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-2.png') }}"
-					alt="Еволуција на Сонот 2"
-					loading="lazy"
-					decoding="async"
-					class="w-full h-full object-cover">
-			</div>
+        {{-- Content Side --}}
+        <div class="flex-1 p-8 md:p-12 flex flex-col justify-center">
+          <h3 class="font-semibold text-2xl uppercase mb-6">
+            Еволуција на Сонот {{ $edition['id'] }}
+          </h3>
+          
+          <div class="space-y-8">
+            @foreach($edition['paragraphs'] as $text)
+              <p>{{ $text }}</p>
+            @endforeach
+          </div>
 
-			<div class="flex-1 p-8 md:p-12 flex flex-col justify-center">
-				<h3 class="font-semibold text-2xl uppercase mb-6 ">
-					Еволуција на Сонот 2
-				</h3>
+          <div class="mt-8">
+            <x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
+              Повеќе →
+            </x-ui.button>
+          </div>
+        </div>
 
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
+      </div>
+    @endforeach
 
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
-
-				<div>
-					<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
-						Повеќе →
-					</x-ui.button>
-				</div>
-			</div>
-		</div>
-
-		{{-- Edition 1 --}}
-		<div class="flex flex-col md:flex-row items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
-			<div class="w-full md:w-[45%] shrink-0">
-				<img src="{{ asset('storage/images/edition-1.png') }}"
-					alt="Еволуција на Сонот 1"
-					loading="lazy"
-					decoding="async"
-					class="w-full h-full object-cover">
-			</div>
-
-			<div class="flex-1 p-8 md:p-12 flex flex-col justify-center">
-				<h3 class="font-semibold text-2xl uppercase mb-6">
-					Еволуција на Сонот 1
-				</h3>
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
-
-				<p class="mb-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam velit voluptatum, iste facere laborum assumenda sed nihil sit unde natus, minus illum recusandae mollitia quam voluptatibus deleniti doloribus consequuntur corrupti. Doloribus pariatur exercitationem ullam, suscipit iure velit repellat officiis repudiandae natus aperiam facilis quibusdam quos. Repudiandae deserunt labore, repellendus molestiae est facere!
-				</p>
-				<div>
-					<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
-						Повеќе →
-					</x-ui.button>
-				</div>
-			</div>
-		</div>
-
-	</div>
+  </div>
 </section>
 
 {{-- CTA --}}
@@ -190,7 +167,7 @@
 	</div>
 
 	<div class="max-w-7xl mx-auto px-6 relative z-10">
-		<h2 class="text-2xl md:text-4xl font-bold uppercase mb-6">
+		<h2 class="text-xl md:text-3xl font-bold uppercase mb-6">
 			Сакаш да биде дел од нашиот колектив?
 		</h2>
 		{{-- Bottom CTA Button --}}

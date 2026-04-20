@@ -72,7 +72,7 @@
 {{-- ЗА НАС --}}
 <section class="relative py-10 bg-cream">
 
-	<div class="hidden lg:block absolute left-0 -top-[5vw] w-[35%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute left-0 -top-[10vw] w-[40%] pointer-events-none z-0">
 		@include('partials.svg.blueblob')
 	</div>
 
@@ -198,7 +198,7 @@
 
   <div class="relative z-10 max-w-7xl mx-auto px-6">
 
-    <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-20">
+    <h2 class="text-lg lg:text-xl font-bold uppercase text-center text-ev-dark mb-20">
       Претходни настани
     </h2>
 
@@ -272,7 +272,7 @@
 
 		{{-- Header Content --}}
 		<div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center mb-12">
-			<h2 class="text-lg font-bold uppercase text-ev-dark">
+			<h2 class="text-lg lg:text-xl font-bold uppercase text-ev-dark">
 				Најнови објави од Инстаграм
 			</h2>
 			<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
@@ -308,6 +308,10 @@
 		</div>
 	</div>
 
+	{{-- Clouds behind carousel --}}
+	<div class="hidden lg:block absolute right-[15%] bottom-[10vw] w-[35%] pointer-events-none z-0">
+		@include('partials.svg.clouds-blog')
+	</div>
 	{{-- Blob 1 --}}
 	<div class="hidden lg:block absolute right-[40%] bottom-[2.8vw] w-[15%] pointer-events-none z-0">
 		@include('partials.svg.insta-blob-1')

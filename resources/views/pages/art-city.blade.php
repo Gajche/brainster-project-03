@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- HERO TOPO --}}
-<section class="relative bg-white overflow-visible">
+<section class="relative bg-cream overflow-visible">
 
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
 
@@ -59,7 +59,7 @@
 </section>
 
 {{-- ПРОГРАМА --}}
-<section class="relative py-10 bg-white overflow-visible">
+<section class="relative py-10 bg-cream overflow-visible">
 
 	{{-- Clouds --}}
 	<div class="hidden lg:block absolute -left-5 bottom-0 translate-y-1/2

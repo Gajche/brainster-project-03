@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- LATEST NEWS HERO --}}
-<section class="relative py-6 bg-cream" x-data="eventSlider()">
+<section class="relative min-h-[calc(100vh-89px)]  py-6 bg-cream" x-data="eventSlider()">
   <div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
     <div x-data class="dandelion-wrap pointer-events-none">
       @include('partials.svg.dandelion')
@@ -18,7 +18,7 @@
     </h2>
 
     {{-- Slider Wrapper --}}
-    <div class="relative w-full h-87.5 md:h-137.5 lg:h-162.5 group">
+    <div class="relative w-full h-112.5 md:h-137.5 lg:h-162.5 group">
       
       @php
       $news = [
@@ -77,7 +77,7 @@
 </section>
 
 {{-- PREVIOUS EDITIONS --}}
-<section class="py-20 bg-cream relative">
+<section class="py-10 lg:py-20 bg-cream relative">
 
   {{-- Clouds --}}
   <div class="hidden lg:block absolute left-0 -top-35 w-[70%] pointer-events-none z-0">
@@ -122,7 +122,7 @@
     @endphp
 
     @foreach($editions as $edition)
-      <div class="flex flex-col {{ $edition['rev'] ? 'md:flex-row-reverse' : 'md:flex-row' }} items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-lg">
+      <div class="flex flex-col {{ $edition['rev'] ? 'md:flex-row-reverse' : 'md:flex-row' }} items-stretch rounded-3xl bg-white mb-10 overflow-hidden shadow-xl border border-gray-200">
 
         {{-- Image Side --}}
         <div class="w-full lg:w-[40%] md:w-[45%] shrink-0">
@@ -168,7 +168,7 @@
 
 	<div class="max-w-7xl mx-auto px-6 relative z-10">
 		<h2 class="text-xl md:text-3xl font-bold uppercase mb-6">
-			Сакаш да биде дел од нашиот колектив?
+			Сакаш да бидеш дел од нашиот колектив?
 		</h2>
 		{{-- Bottom CTA Button --}}
 		<x-ui.button href="{{ route('work-with-us') }}">

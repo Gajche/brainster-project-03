@@ -12,6 +12,7 @@
 		content="@yield('description', 'Еволуција на Сонот - уметнички и културен фестивал во Македонија.')">
 	@vite(['resources/css/main.css' , 'resources/js/app.js'])
 	@stack('head')
+	{{-- @stack('styles') --}}
 </head>
 
 <body class="bg-cream font-sans text-ev-dark overflow-x-hidden">

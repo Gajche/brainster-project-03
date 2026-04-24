@@ -7,9 +7,13 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![jQuery](https://img.shields.io/badge/jQuery-4.x.x-0769AD?style=flat&logo=jquery&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet-1.9.4-199900?style=flat&logo=leaflet&logoColor=white)
+![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-Map_Data-7EBC6F?style=flat&logo=openstreetmap&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=flat&logo=bootstrap&logoColor=white)
+![Toastr](https://img.shields.io/badge/Toastr-2.1.4-F2709C?style=flat&logo=javascript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=flat&logo=vite&logoColor=white)
 ![Mailpit](https://img.shields.io/badge/Mailpit-Local_Mail-00B4D8?style=flat&logo=maildotru&logoColor=white)
 
@@ -23,15 +27,16 @@ A web-based platform for the **Еволуција на Сонот** arts and cul
 
 **Public**
 
-- Home, Art City, Blog, and Work With Us pages in Macedonian Cyrillic
-- Artist application form with full frontend + backend validation (PDF upload only)
-- Google Maps embed for festival venue locations
-- Responsive - mobile-first, works across all screen sizes
+- Home, Art City, Blog, and Work With Us pages in Macedonian Cyrillic.
+- **Interactive Art City Map**: Built with Leaflet.js and OpenStreetMap, featuring custom pins and interactive venue markers.
+- **Artist Application Form**: Integrated frontend (jQuery) and backend (Laravel) validation with Toastr notifications.
+- Responsive - mobile-first design optimized for all screen sizes.
 
 **Artists**
 
-- Submit an application with personal info, collaboration area, message, and PDF portfolio
-- Receive a confirmation email on successful submission
+- Submit applications with personal info, collaboration areas, and PDF portfolios.
+- Real-time feedback via Toastr notifications on form submission.
+- Automatic confirmation emails via Mailpit integration.
 
 **Admins**
 
@@ -45,18 +50,20 @@ A web-based platform for the **Еволуција на Сонот** arts and cul
 
 ## Tech Stack
 
-| Layer        | Technology                            |
-| ------------ | ------------------------------------- |
-| Framework    | Laravel 12                            |
-| Language     | PHP 8.2+                              |
-| Database     | MySQL 8.0                             |
-| Auth         | Laravel Breeze (Blade)                |
-| Public CSS   | Tailwind CSS 4 + `@tailwindcss/forms` |
-| Admin CSS    | Bootstrap 5.3.8                       |
-| Validation   | Javascript                            |
-| Build tool   | Vite 8                                |
-| Mail testing | Mailpit                               |
-| Font         | Fira Sans (Google Fonts)              |
+| Layer         | Technology                            |
+| ------------- | ------------------------------------- |
+| Framework     | Laravel 12                            |
+| Language      | PHP 8.2+                              |
+| Database      | MySQL 8.0                             |
+| Mapping       | Leaflet.js & OpenStreetMap            |
+| UI Components | jQuery, Toastr.js & Alpine.js         |
+| Auth          | Laravel Breeze (Blade)                |
+| Public CSS    | Tailwind CSS 4 + `@tailwindcss/forms` |
+| Admin CSS     | Bootstrap 5.3.8                       |
+| Validation    | Javascript                            |
+| Build tool    | Vite 8                                |
+| Mail testing  | Mailpit                               |
+| Font          | Fira Sans (Google Fonts)              |
 
 ---
 
@@ -330,6 +337,8 @@ resources/
 │   └-- admin.css      ← Bootstrap (admin panel)
 ├-- js/
 │   ├-- navbar.js      ← Mobile/Tablet navigation menu (Hamburger menu)
+│   ├-- notifications.js  ← Toastr notification alerts
+│   ├-- slider.js      ← Images (Home, Blog)
 │   └-- validation.js  ← Artist form frontend validation
 └-- views/
     ├-- admin/
@@ -351,6 +360,32 @@ database/
     ├-- AdminUserSeeder.php
     └-- DatabaseSeeder.php
 ```
+
+---
+
+## Live Test Deployment
+
+A temporary test deployment of the application is available for demonstration purposes:
+
+### Public page
+
+🔗 **URL:** https://evolucija-na-sonot.up.railway.app/
+
+### Admin panel
+
+🔗 **URL:** https://evolucija-na-sonot.up.railway.app/admin
+
+### Mail inbox
+
+🔗 **URL:** https://mailpit-evolucija-na-sonot.up.railway.app/
+
+> ⚠️ **Note:**  
+> This deployment is intended **for testing and preview only**.  
+> Data may be reset at any time, performance may vary, and the environment is not production-hardened.
+
+You can use the default credentials listed to explore the admin panel.
+
+---
 
 ---
 

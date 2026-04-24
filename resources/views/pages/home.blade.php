@@ -30,7 +30,7 @@
 	{{-- Content Container --}}
 	<div class="relative z-10 max-w-7xl mx-auto w-full px-6 py-20">
 
-		<div class="relative w-full  flex flex-col lg:bg-transparent lg:p-2 pt-12 md:pt-16 px-6 pb-10 xs:mt-48 md:mt-100 lg:mt-0">
+		<div class="relative w-full  flex flex-col lg:bg-transparent lg:p-2 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0">
 
 			<div class="absolute inset-0 lg:hidden -z-10 mx-0 px-0">
 				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"
@@ -46,7 +46,7 @@
 			</div>
 
 			{{-- Text content --}}
-			<p class="hidden md:block uppercase font-bold text-ev-dark mb-4">
+			<p class="hidden lg:block uppercase font-bold text-ev-dark mb-4">
 				Редефинирај ја реалноста
 			</p>
 
@@ -189,7 +189,7 @@
 </div>
 
 {{-- ПРЕТХОДНИ НАСТАНИ --}}
-<section class="relative py-20 bg-cream" x-data="eventSlider()">
+<section class="relative min-h-screen py-20 bg-cream" x-data="eventSlider()">
 
   {{-- Clouds --}}
   <div class="hidden lg:block absolute right-0 -top-65 w-[35%] pointer-events-none z-0">
@@ -203,7 +203,7 @@
     </h2>
 
     {{-- Slider Wrapper --}}
-    <div class="relative w-full h-87.5 md:h-137.5 lg:h-162.5 group">
+    <div class="relative w-full h-112.5 md:h-137.5 lg:h-162.5 group">
       
       @php
       // Data array

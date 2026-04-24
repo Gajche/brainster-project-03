@@ -51,3 +51,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
 // Redirect /admin to dashboard (convenience)
 Route::redirect('/admin', '/admin/dashboard');
+
+// Toastr-test
+Route::get('/test-toast', function () {
+	return redirect('/')->with('success', 'Сè работи совршено! (Everything works perfectly!)');
+});

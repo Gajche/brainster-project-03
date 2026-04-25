@@ -5,7 +5,7 @@
 
 @section('content')
 
-{{-- Stats --}}
+<!-- Stats -->
 @if(!empty($stats))
 <div class="row g-3 mb-4">
 	<div class="col-sm-6 col-xl-3">
@@ -35,7 +35,7 @@
 </div>
 @endif
 
-{{-- Approved applications grouped by year --}}
+<!-- Approved applications grouped by year -->
 @forelse($approvedByYear as $year => $applications)
 <div class="card mb-4 border-0 shadow-sm">
 	<div class="card-header bg-white fw-bold">

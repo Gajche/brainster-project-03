@@ -73,7 +73,7 @@
                     justify-center bg-ev-blue-light rounded-[40px] px-8 py-6
                     lg:bg-transparent lg:rounded-none lg:px-0 lg:py-6">
 
-			<h2 class="relative z-10 text-xl font-bold uppercase text-center text-ev-dark mb-8 lg:mb-10">
+			<h2 class="relative z-10 text-3xl md:text-xl font-bold uppercase text-center text-ev-dark mb-8 lg:mb-10">
 				Програма
 			</h2>
 
@@ -93,11 +93,11 @@
 				@endphp
 				@foreach($days as $day)
 				<div class="text-center px-4">
-					<h3 class="font-black text-ev-blue text-xl mb-2">{{ $day['name'] }}</h3>
-					<p class="text-ev-dark text-xs md:text-sm leading-relaxed mb-2">
+					<h3 class="font-bold text-ev-blue text-xl md:text-xl mb-2">{{ $day['name'] }}</h3>
+					<p class="text-ev-dark text-base md:text-sm leading-relaxed mb-2">
 						Lorem Ipsum has been the industry's standard dummy
 					</p>
-					<p class="font-black text-ev-blue text-lg mb-2">{{ $day['time'] }}</p>
+					<p class="font-bold text-ev-blue text-lg mb-2">{{ $day['time'] }}</p>
 				</div>
 				@endforeach
 			</div>
@@ -210,7 +210,7 @@
 	</div>
 
 
-	<div class="hidden lg:block absolute left-[11%] bottom-10 w-[15%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute left-[11%] bottom-[2.8vw] w-[15%] pointer-events-none z-0">
 		@include('partials.svg.insta-blob-1')
 	</div>
 

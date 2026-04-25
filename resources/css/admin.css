@@ -9,6 +9,9 @@
 /* toastr */
 @import "toastr/build/toastr.min.css";
 
+/* Import Fontawesome */
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 /* Base Styles */
 body {
     font-family: "Fira Sans", sans-serif;

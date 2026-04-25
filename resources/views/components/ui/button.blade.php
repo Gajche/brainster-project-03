@@ -1,4 +1,4 @@
-{{-- resources/views/components/ui/button.blade.php --}}
+<!-- resources/views/components/ui/button.blade.php -->
 @props([
 'type' => 'button',
 'href' => null,
@@ -6,7 +6,7 @@
 ])
 
 @php
-// 1. We define the standard "Global" size and font here
+// We define the standard "Global" size and font here
 $standardSize = 'w-[140px] h-[36px] font-[16px]';
 
 $baseClasses = 'inline-flex items-center justify-center font-medium rounded-[10px] transition-all duration-200 no-underline cursor-pointer disabled:opacity-50 ' . $standardSize;

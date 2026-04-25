@@ -15,10 +15,13 @@
 /* Import Toastr */
 @import "toastr/build/toastr.min.css";
 
+/* Import Fontawesome */
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 @theme {
     /* Custom Colors */
-    /* --color-cream: #f5f0e8; */
-    --color-cream: #ffffff;
+    --color-cream: #f5f0e8;
+    /* --color-cream: #ffffff; */
     --color-ev-blue: #3a6fd8;
     --color-ev-blue-dark: #2a5abf;
     --color-ev-blue-light: #c8d8f5;
@@ -27,6 +30,7 @@
     --color-ev-dark: #000000;
 
     /* Custom Breakpoint */
+    /* --breakpoint-xxs: 320px; */
     --breakpoint-xs: 320px;
 
     /* Custom Font Family */
@@ -126,15 +130,15 @@
 
         /* Mobile */
         left: 8px;
-        top: -80px;
+        top: -78px;
         width: 120px;
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 426px) {
         /* Tablet */
         .dandelion-wrap {
             left: 8px;
-            top: -86px;
+            top: -84px;
             width: 140px;
         }
     }
@@ -173,9 +177,9 @@
 }
 
 @media (min-width: 1024px) {
-    /* Desktop - Matching your uploaded image */
+    /* Desktop  */
     .dandelion-footer-wrap {
-        left: 150px; /* Or use a fixed px value if you want it aligned with the container */
+        left: 150px;
         top: -36px;
         width: 80px;
         overflow: hidden;

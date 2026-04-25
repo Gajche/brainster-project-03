@@ -5,13 +5,17 @@
 
 @section('content')
 
-{{-- Search Form --}}
-<form method="GET" action="{{ route('admin.applications.all') }}" class="mb-4">
-    <div class="input-group w-100" style="max-width: 420px;">
+{{-- SEARCH SECTION --}}
+<form method="GET" action="{{ route('admin.applications.pending') }}" class="mb-4">
+    <div class="input-group w-100" style="max-width:420px;">
         <input type="text" name="search" class="form-control" placeholder="Пребарај..." value="{{ $search ?? '' }}">
-        <button type="submit" class="btn btn-primary">Пребарај</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         @if($search)
-            <a href="{{ route('admin.applications.all') }}" class="btn btn-outline-secondary">Откажи</a>
+            <a href="{{ route('admin.applications.pending') }}" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-xmark me-1"></i> Откажи
+            </a>
         @endif
     </div>
 </form>

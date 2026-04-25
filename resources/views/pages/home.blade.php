@@ -5,16 +5,17 @@
 @section('content')
 
 {{-- HERO --}}
-<section class="relative min-h-[calc(100vh-89px)] lg:h-[calc(100dvh-85px)] flex items-center overflow-visible bg-cream">
+<section class="relative min-h-[calc(100vh-89px)] lg:min-h-[calc(100dvh-85px)] flex items-center bg-cream">
 
-	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-50">
+	{{-- Dandelion --}}
+	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-100">
 		<div x-data class="dandelion-wrap pointer-events-none ">
 			@include('partials.svg.dandelion')
 		</div>
 	</div>
 
 	{{-- Hero Image --}}
-	<div class="absolute inset-0 max-w-7xl mx-auto w-full lg:px-6 pointer-events-none flex">
+	<div class="absolute inset-0 max-w-7xl mx-auto w-full lg:px-6 pointer-events-none flex z-0">
 		<div class="ml-auto w-full lg:w-[60%]">
 			<img
 				src="{{ asset('storage/images/hero-face.webp') }}"
@@ -25,10 +26,8 @@
 		</div>
 	</div>
 
-
-
 	{{-- Content Container --}}
-	<div class="relative z-10 max-w-7xl mx-auto w-full px-6 py-20">
+	<div class="relative z-20 max-w-7xl mx-auto w-full px-6 py-20">
 
 		<div class="relative w-full  flex flex-col lg:bg-transparent lg:p-2 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0">
 
@@ -40,7 +39,7 @@
 					decoding="async">
 			</div>
 
-			{{-- Tablet SVG Background (Visible ONLY on 768px up to 1023px) --}}
+			{{-- Tablet SVG Background --}}
 			<div class="absolute inset-0 hidden md:block lg:hidden -z-10">
 				@include('partials.svg.ipad-bg')
 			</div>
@@ -72,11 +71,12 @@
 {{-- ЗА НАС --}}
 <section class="relative py-10 bg-cream">
 
-	<div class="hidden lg:block absolute left-0 -top-[10vw] w-[40%] pointer-events-none z-0">
+	{{-- Layered Decorative SVG --}}
+	<div class="md:hidden lg:block xs:block absolute xs:-right-0 lg:left-0 xs:-top-[20vw] lg:-top-[10vw] xs:w-[50%] lg:w-[40%] pointer-events-none z-10">
 		@include('partials.svg.blueblob')
 	</div>
 
-	<div class="relative z-10 max-w-7xl mx-auto px-6">
+	<div class="relative z-20 max-w-7xl mx-auto px-6">
 		<div class="flex">
 			<div class="ml-auto w-full lg:w-[60%]">
 
@@ -95,28 +95,23 @@
 
 {{-- VIDEO SECTION via alpine.js --}}
 @php
-    $videoType = 'local'; // 'local' or 'youtube'
+    $videoType = 'local'; 
     $videoUrl = asset('storage/video/video-insta.mp4'); 
 
-		// $videoUrl = 'https://www.youtube.com/embed/oQbgZ8DcG8U?si=Li9ZAfhJoQgD6hQO';
-
-    // Logic for YouTube Thumbnails vs Local Fragments
     if ($videoType === 'youtube') {
         preg_match('/(?:embed\/|v=)([\w-]+)/', $videoUrl, $matches);
         $youtubeId = $matches[1] ?? '';
         $posterUrl = "https://img.youtube.com/vi/{$youtubeId}/maxresdefault.jpg";
     } else {
-        // Tells the browser to load the frame at 0.001 seconds
         $videoUrlWithFragment = $videoUrl . '#t=0.001';
     }
 @endphp
 
-<div class="relative z-10 max-w-7xl mx-auto px-6 py-6" 
+<div class="relative z-20 max-w-7xl mx-auto px-6 py-6" 
       x-data="{ 
         playing: false,
         toggleVideo() {
             this.playing = !this.playing;
-            // If local video exists, control playback via reference
             if (this.$refs.localVideo) {
                 this.playing ? this.$refs.localVideo.play() : this.$refs.localVideo.pause();
             }
@@ -126,7 +121,6 @@
     <div class="relative rounded-lg overflow-hidden min-h-75 md:min-h-125 flex flex-col items-center justify-center bg-[#33322f] shadow-xl">
         
         @if($videoType === 'youtube')
-            {{-- YOUTUBE MODE: Uses Thumbnail + Iframe Swap --}}
             <div x-show="!playing" 
                   class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-cover bg-center transition-opacity duration-500"
                   style="background-image: url('{{ $posterUrl }}');">
@@ -152,7 +146,6 @@
             </template>
 
         @else
-            {{-- LOCAL MODE: Uses the Video Element itself as the placeholder --}}
             <div class="absolute inset-0 z-10 w-full h-full bg-black">
                 <video x-ref="localVideo"
                         :controls="playing"
@@ -164,7 +157,6 @@
                 </video>
             </div>
 
-            {{-- Play Button Overlay for Local --}}
             <div x-show="!playing" 
                   class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/20 transition-opacity duration-500">
                 <button @click="toggleVideo()"
@@ -176,7 +168,6 @@
             </div>
         @endif
 
-        {{-- Close/Stop Button (Works for both) --}}
         <button x-show="playing" 
                 @click="toggleVideo()" 
                 class="absolute top-4 right-4 z-40 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full transition-all"
@@ -189,19 +180,18 @@
 </div>
 
 {{-- ПРЕТХОДНИ НАСТАНИ SECTION --}}
-<section class="relative  py-20 bg-cream" x-data="eventSlider()">
+<section class="relative py-20 bg-cream" x-data="eventSlider()">
 
-    {{-- Clouds Decorative Element --}}
-    <div class="hidden lg:block absolute right-0 -top-[12vw] w-[35%] pointer-events-none z-0">
+    {{-- Layered Decorative SVG --}}
+    <div class="hidden lg:block absolute right-0 -top-[12vw] w-[35%] pointer-events-none z-10">
         @include('partials.svg.clouds')
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <div class="relative z-20 max-w-7xl mx-auto px-6">
         <h2 class="text-lg lg:text-xl font-bold uppercase text-center text-ev-dark mb-20">
             Претходни настани
         </h2>
 
-        {{-- Slider Wrapper --}}
         <div class="relative w-full h-112.5 md:h-137.5 lg:h-162.5 group">
 
             @php
@@ -212,7 +202,6 @@
                 ];
             @endphp
 
-            {{-- Navigation Buttons --}}
             <button @click="prev()"
                 class="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-ev-dark hover:text-white transition-all shadow-lg active:scale-95">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -227,7 +216,6 @@
                 </svg>
             </button>
 
-            {{-- Event Cards --}}
             @foreach($events as $index => $event)
                 <div class="event-card absolute inset-0" :class="getCardClass({{ $index }})">
                     <div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
@@ -235,13 +223,11 @@
                               alt="{{ $event['title'] }}" 
                               class="w-full h-full object-cover">
 
-                        {{-- Mobile Overlay (Hidden on Desktop) --}}
                         <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 pb-6 md:hidden">
                             <h5 class="text-white text-xl font-bold mb-3 tracking-wide">
                                 {{ $event['title'] }}
                             </h5>
 
-                            {{-- Timer Display --}}
                             <div class="flex gap-4 mb-4">
                                 @foreach(['00', '00', '00'] as $unit)
                                     <div class="flex gap-1">
@@ -262,7 +248,6 @@
                             </div>
                         </div>
 
-                        {{-- Desktop Overlay (Hidden on Mobile) --}}
                         <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white/80 uppercase hidden md:block">
                             <h5 class="font-bold text-base text-ev-dark mb-1">
                                 {{ $event['title'] }}
@@ -279,7 +264,6 @@
             @endforeach
         </div>
 
-        {{-- Bottom Action Button --}}
         <div class="flex justify-start mt-6">
             <x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">
                 Повеќе
@@ -289,12 +273,10 @@
 </section>
 
 {{-- ИНСТАГРАМ --}}
-<section class="relative pt-20 pb-40 bg-cream overflow-hidden">
+<section class="relative pt-20 pb-40 bg-cream">
 
-	{{-- Main Container --}}
-	<div class="relative z-10 max-w-7xl mx-auto px-6">
+	<div class="relative z-20 max-w-7xl mx-auto px-6">
 
-		{{-- Header Content --}}
 		<div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center mb-12">
 			<h2 class="text-lg lg:text-xl font-bold uppercase text-ev-dark">
 				Најнови објави од Инстаграм
@@ -304,13 +286,11 @@
 			</x-ui.button>
 		</div>
 
-		{{-- The Marquee Wrapper --}}
 		<div class="relative flex overflow-hidden marquee-mask">
 			@foreach([1, 2] as $loopCount)
 			<div class="flex animate-marquee whitespace-nowrap pause-on-hover">
 				@php
 				$images = [1, 2, 3, 4];
-				// We only shuffle once so both tracks match for a seamless loop
 				@endphp
 
 				@foreach($images as $i)
@@ -332,16 +312,14 @@
 		</div>
 	</div>
 
-	{{-- Clouds behind carousel --}}
-	<div class="hidden lg:block absolute right-[15%] bottom-[10vw] w-[35%] pointer-events-none z-0">
+	{{-- Layered Decorative SVGs (z-10) --}}
+	<div class="hidden lg:block absolute right-[15%] bottom-[10vw] w-[35%] pointer-events-none z-10">
 		@include('partials.svg.clouds-blog')
 	</div>
-	{{-- Blob 1 --}}
-	<div class="hidden lg:block absolute right-[40%] bottom-[2.8vw] w-[15%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute right-[40%] bottom-[2.8vw] w-[15%] pointer-events-none z-10">
 		@include('partials.svg.insta-blob-1')
 	</div>
-	{{-- Blob 2 --}}
-	<div class="hidden lg:block absolute right-[25%] bottom-0 w-[15%] pointer-events-none z-0">
+	<div class="hidden lg:block absolute right-[25%] bottom-0 w-[15%] pointer-events-none z-10">
 		@include('partials.svg.insta-blob-2')
 	</div>
 </section>

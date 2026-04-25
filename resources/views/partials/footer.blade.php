@@ -10,7 +10,7 @@
 		</div>
 
 		{{-- Contact --}}
-		<div class="flex items-center gap-2 text-sm text-ev-dark text-center md:text-center lg:ml-20 md:ml-20">
+		<div class="flex items-center gap-2 text-sm text-ev-dark text-center md:text-center lg:ml-30 md:ml-20">
 			<!-- <span class="hidden md:inline text-gray-400">|</span> -->
 			<span>
 				| Контактирај не
@@ -21,7 +21,7 @@
 		</div>
 
 		{{-- Socials --}}
-		<div class="flex items-center justify-center gap-6">
+		<div class="flex items-center justify-center gap-6 lg:gap-12">
 			<a href="https://www.youtube.com/" target="_blank" class="hover:opacity-75 transition">
 				@include('partials.icons.youtube')
 			</a>

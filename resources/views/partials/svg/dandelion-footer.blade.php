@@ -2,4 +2,4 @@
 	alt="dandelion-footer"
 	loading="lazy"
 	decoding="async"
-	class="w-full h-auto pointer-events-none">
+	class="w-auto h-auto pointer-events-none">

@@ -31,6 +31,7 @@
 
     /* Custom Breakpoint */
     /* --breakpoint-xxs: 320px; */
+    --breakpoint-qhd: 2560px;
     --breakpoint-xs: 320px;
 
     /* Custom Font Family */
@@ -170,18 +171,30 @@
 @media (min-width: 768px) {
     /* Tablet */
     .dandelion-footer-wrap {
-        left: 40px;
-        top: -32px;
-        width: 60px;
+        left: 24px;
+        top: -34px;
+        width: 70px;
+        overflow: hidden;
     }
 }
 
 @media (min-width: 1024px) {
     /* Desktop  */
     .dandelion-footer-wrap {
-        left: 150px;
-        top: -36px;
-        width: 80px;
+        left: 24px;
+        top: -34px;
+        width: 90px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1440px) {
+    /* Desktop  */
+    .dandelion-footer-wrap {
+        left: 184px;
+        top: -34px;
+        width: 90px;
+        /* height: auto; */
         overflow: hidden;
     }
 }

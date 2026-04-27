@@ -71,9 +71,11 @@
 <section class="relative py-10 bg-cream">
 
 	{{-- Layered Decorative SVG --}}
-	<div class="md:hidden lg:block xs:block absolute xs:-right-0 lg:left-0 xs:-top-[20vw] lg:-top-[10vw] xs:w-[50%] lg:w-[40%] pointer-events-none z-10">
-		@include('partials.svg.blueblob')
-	</div>
+	<div class="decorative-wrapper">
+      <div class="decorative-svg blob-pos">
+          @include('partials.svg.blueblob')
+      </div>
+  </div>
 
 	<div class="relative z-20 max-w-7xl mx-auto px-6 md:px-12">
 		<div class="flex">
@@ -182,8 +184,10 @@
 <section class="relative py-20 bg-cream" x-data="eventSlider()">
 
     {{-- Layered Decorative SVG --}}
-    <div class="hidden lg:block absolute right-0 -top-[12vw] w-[35%] pointer-events-none z-10">
-        @include('partials.svg.clouds')
+    <div class="decorative-wrapper">
+      <div class="decorative-svg clouds-pos">
+          @include('partials.svg.clouds')
+      </div>
     </div>
 
     <div class="relative z-20 max-w-7xl mx-auto px-6">
@@ -312,15 +316,24 @@
 	</div>
 
 	{{-- Layered Decorative SVGs --}}
-	<div class="hidden lg:block absolute right-[15%] bottom-[10vw] w-[35%] pointer-events-none z-10">
-		@include('partials.svg.clouds-blog')
-	</div>
-	<div class="hidden lg:block absolute right-[40%] bottom-[2.8vw] w-[15%] pointer-events-none z-10">
-		@include('partials.svg.insta-blob-1')
-	</div>
-	<div class="hidden lg:block absolute right-[25%] bottom-0 w-[15%] pointer-events-none z-10">
-		@include('partials.svg.insta-blob-2')
-	</div>
+  
+
+
+			<div class="decorative-wrapper">
+        <div class="decorative-svg leaf-pos">
+          @include('partials.svg.leaf')
+        </div>
+        <div class="decorative-svg clouds-insta-pos">
+          @include('partials.svg.clouds-blog')
+        </div>
+				<div class="decorative-svg insta-blob-1-pos">
+          @include('partials.svg.insta-blob-1')
+        </div>
+				<div class="decorative-svg insta-blob-2-pos">
+          @include('partials.svg.insta-blob-2')
+        </div>
+      </div>
+
 </section>
 
 @endsection

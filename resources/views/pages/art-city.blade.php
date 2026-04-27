@@ -54,8 +54,11 @@
 {{-- ПРОГРАМА --}}
 <section class="relative py-10 bg-cream">
     {{-- Clouds --}}
-    <div class="hidden lg:block absolute -left-5 bottom-0 translate-y-1/2 w-[60%] pointer-events-none z-10">
-        @include('partials.svg.cloudsleft')
+    {{-- Layered Decorative SVG --}}
+    <div class="decorative-wrapper">
+      <div class="decorative-svg ac-clouds-pos">
+          @include('partials.svg.cloudsleft')
+      </div>
     </div>
 
     {{-- Програма content --}}
@@ -162,12 +165,23 @@
     </div>
 
     {{-- Blobs --}}
-    <div class="hidden lg:block absolute left-[11%] bottom-[2.8vw] w-[15%] pointer-events-none z-10">
+    {{-- <div class="hidden lg:block absolute left-[11%] bottom-[2.8vw] w-[15%] pointer-events-none z-10">
         @include('partials.svg.insta-blob-1')
     </div>
 
     <div class="hidden lg:block absolute left-[26%] bottom-0 w-[15%] pointer-events-none z-10">
         @include('partials.svg.insta-blob-2')
+    </div> --}}
+
+		{{-- Layered Decorative SVG --}}
+    <div class="decorative-wrapper">
+      <div class="decorative-svg ac-blob1-pos">
+          @include('partials.svg.insta-blob-1')
+      </div>
+
+			<div class="decorative-svg ac-blob2-pos">
+          @include('partials.svg.insta-blob-2')
+      </div>
     </div>
 </section>
 

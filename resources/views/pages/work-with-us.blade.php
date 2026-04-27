@@ -128,8 +128,14 @@
     </div>
   </div>
 
-  <div class="hidden lg:block absolute right-[0%] bottom-0 w-[25%] pointer-events-none z-0">
+  {{-- <div class="hidden lg:block absolute right-[0%] bottom-0 w-[25%] pointer-events-none z-0">
     @include('partials.svg.work-with-us-blob')
+  </div> --}}
+
+	<div class="decorative-wrapper">
+    <div class="decorative-svg wwu-blob-pos">
+      @include('partials.svg.work-with-us-blob')
+    </div>
   </div>
 
 </section>

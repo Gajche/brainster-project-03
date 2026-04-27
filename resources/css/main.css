@@ -275,3 +275,116 @@
         min-height: calc(50vh - 85px);
     }
 }
+
+/* DECORATIVE SVG */
+
+@media (min-width: 1024px) {
+    /* Prevents horizontal scroll/swipe on desktop and tablets */
+    section {
+        overflow-x: clip;
+    }
+
+    .decorative-wrapper {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+        width: 100%;
+        max-width: 1280px; /* Matches your max-w-7xl */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .decorative-svg {
+        position: absolute;
+        height: auto;
+    }
+
+    /* HOME SECTION */
+    .blob-pos {
+        left: -150px;
+        bottom: -200px;
+        width: 580px;
+    }
+    .clouds-pos {
+        right: -150px;
+        top: -250px;
+        width: 520px;
+    }
+
+    /* INSTAGRAM SECTION */
+    .leaf-pos {
+        left: -84px;
+        bottom: 480px;
+        width: 580px;
+    }
+    .clouds-insta-pos {
+        right: 40px;
+        bottom: 240px;
+        width: 460px;
+    }
+    .insta-blob-1-pos {
+        right: 320px;
+        bottom: 30px;
+        width: 260px;
+    }
+    .insta-blob-2-pos {
+        right: 30px;
+        bottom: 0px;
+        width: 260px;
+    }
+
+    /* ART CITY SECTION */
+    .ac-clouds-pos {
+        left: -150px;
+        bottom: -260px;
+        width: 960px;
+    }
+    .ac-droplet-pos {
+        right: -150px;
+        bottom: -250px;
+        width: 420px;
+    }
+    .ac-blob1-pos {
+        left: 30px;
+        bottom: 30px;
+        width: 260px;
+    }
+    .ac-blob2-pos {
+        left: 320px;
+        bottom: 0px;
+        width: 260px;
+    }
+
+    /* BLOG SECTION */
+    .blog-clouds-pos {
+        left: -150px;
+        top: -100px;
+        width: 900px;
+    }
+    .blog-clouds-right-pos {
+        right: -150px;
+        bottom: 270px;
+        width: 580px;
+    }
+    .blog-leaf-pos {
+        left: -300px;
+        bottom: -100px;
+        width: 640px;
+    }
+
+    /* WORK WITH US SECTION */
+    .wwu-blob-pos {
+        right: -150px;
+        bottom: 0px;
+        width: 512px;
+    }
+}
+
+/* MOBILE & TABLET SAFETY */
+/* This kills the SVGs on anything smaller than a laptop */
+@media (max-width: 1023px) {
+    .decorative-wrapper {
+        display: none !important;
+    }
+}

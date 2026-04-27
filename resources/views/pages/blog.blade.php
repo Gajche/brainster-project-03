@@ -60,8 +60,11 @@
 {{-- PREVIOUS EDITIONS --}}
 <section class="py-10 lg:py-20 bg-cream relative">
     {{-- Clouds --}}
-    <div class="hidden lg:block absolute left-0 -top-[12vw] w-[70%] pointer-events-none z-10">
-        @include('partials.svg.cloudsleft1')
+        {{-- Layered Decorative SVG --}}
+    <div class="decorative-wrapper">
+      <div class="decorative-svg blog-clouds-pos">
+          @include('partials.svg.cloudsleft1')
+      </div>
     </div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-20">
@@ -116,12 +119,15 @@
 {{-- CTA - Call to action --}}
 <section class="py-40 bg-cream text-center relative">
     {{-- SVGs --}}
-    <div class="hidden lg:block absolute right-0 -top-[18vw] w-[35%] pointer-events-none z-10">
-        @include('partials.svg.clouds-blog')
-    </div>
-
-    <div class="hidden lg:block absolute -left-[10%] -bottom-10 w-[40%] pointer-events-none z-10">
-        @include('partials.svg.leaf-blog')
+    {{-- Layered Decorative SVG --}}
+    <div class="decorative-wrapper">
+      <div class="decorative-svg blog-clouds-right-pos">
+          @include('partials.svg.clouds-blog')
+      </div>
+    
+      <div class="decorative-svg blog-leaf-pos">
+          @include('partials.svg.leaf-blog')
+      </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-20">

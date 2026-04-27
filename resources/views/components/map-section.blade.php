@@ -2,8 +2,11 @@
 <section {{ $attributes->merge(['class' => 'relative py-20 bg-cream overflow-visible']) }}>
     
     {{-- Droplet --}}
-    <div class="hidden lg:block absolute right-0 bottom-0 translate-y-1/2 w-[25%] pointer-events-none z-20">
-        @include('partials.svg.droplet')
+    {{-- Layered Decorative SVG --}}
+    <div class="decorative-wrapper">
+      <div class="decorative-svg ac-droplet-pos">
+          @include('partials.svg.droplet')
+      </div>
     </div>
 
     <div class="relative z-30 max-w-7xl mx-auto px-6">

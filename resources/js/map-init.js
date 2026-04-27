@@ -1,4 +1,3 @@
-// resources/js/map-init.js
 import L from "leaflet";
 
 // Fix for default marker icons with Vite
@@ -19,14 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const mapLabel = document.getElementById("map-label"); // Target the floating label
 
     if (mapContainer) {
-        // 1. Initialize map
+        // Initialize map
         const map = L.map("map", {
             scrollWheelZoom: false,
             dragging: !L.Browser.mobile,
             tap: !L.Browser.mobile,
         }).setView([41.4331, 22.0125], 13);
 
-        // 2. Tile Layer (Voyager is cleaner for "Art" themes)
+        // Tile Layer (Voyager is cleaner for "Art" themes)
         L.tileLayer(
             "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
             {
@@ -36,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         ).addTo(map);
 
-        // 3. Your Locations
+        // Your Locations
         const locations = [
             {
                 name: "Ул. „Франклин Рузвелт“ 44а, Скопје",
@@ -65,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const markerArray = [];
 
-        // 4. Add markers to map
+        // Add markers to map
         locations.forEach((loc) => {
             const marker = L.marker(loc.coords).addTo(map);
 
@@ -93,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             markerArray.push(marker);
         });
 
-        // 5. Reset label when clicking anywhere else on the map
+        // Reset label when clicking anywhere else on the map
         map.on("click", function () {
             if (mapLabel) {
                 mapLabel.style.opacity = "0";
@@ -104,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // 6. SMART ZOOM (Fit all pins)
+        // SMART ZOOM (Fit all pins)
         if (markerArray.length > 0) {
             const group = new L.featureGroup(markerArray);
             // pad(0.2) gives 20% breathing room so pins aren't on the edge

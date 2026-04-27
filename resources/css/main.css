@@ -31,7 +31,7 @@
 
     /* Custom Breakpoint */
     /* --breakpoint-xxs: 320px; */
-    --breakpoint-qhd: 2560px;
+    --breakpoint-qhd: 1800px;
     --breakpoint-xs: 320px;
 
     /* Custom Font Family */
@@ -81,13 +81,6 @@
         @apply opacity-90 text-white;
     }
 
-    /* .nav-logo-img {
-        transform: rotate(-15deg);
-        transform-origin: center center;
-        pointer-events: none;
-        z-index: 10;
-    } */
-
     /* Video overlay */
     .video-overlay::before {
         content: "";
@@ -127,7 +120,7 @@
         position: absolute;
         overflow: visible;
         pointer-events: none;
-        z-index: 50;
+        z-index: 100;
 
         /* Mobile */
         left: 8px;
@@ -149,7 +142,7 @@
         .dandelion-wrap {
             display: block;
             left: 0; /* Starts at the edge of the px-6 container */
-            top: -86px; /* Pulls it up into the navbar area */
+            top: -82px; /* Pulls it up into the navbar area */
             width: 200px; /* Size on desktop */
         }
     }
@@ -277,3 +270,10 @@
 .toast-error {
     background-color: #ef4444;
 } /* Tailwind Red-500 */
+
+/* qhd */
+@media (min-width: 1980px) {
+    .qhd {
+        min-height: calc(50vh - 85px);
+    }
+}

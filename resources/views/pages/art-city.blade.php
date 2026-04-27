@@ -1,4 +1,3 @@
-{{-- resources/views/art-city.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Арт Сити - Еволуција на Сонот')
 

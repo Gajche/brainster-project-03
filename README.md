@@ -4,6 +4,8 @@
 
 ## Еволуција на Сонот / Evolution of the Dream
 
+<div align="center">
+
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
@@ -14,11 +16,19 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=flat&logo=bootstrap&logoColor=white)
 ![Toastr](https://img.shields.io/badge/Toastr-2.1.4-F2709C?style=flat&logo=javascript&logoColor=white)
+![Font Awesome](https://img.shields.io/badge/Font_Awesome-7.x-33B5E5?style=flat&logo=fontawesome&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=flat&logo=vite&logoColor=white)
 ![Mailpit](https://img.shields.io/badge/Mailpit-Local_Mail-00B4D8?style=flat&logo=maildotru&logoColor=white)
+![PHPDoc](https://img.shields.io/badge/PHPDoc-Documented-777BB4?style=flat&logo=php&logoColor=white)
+![Laravel Docs](https://img.shields.io/badge/Laravel-Documentation-FF2D20?style=flat&logo=laravel&logoColor=white)
+![JSDoc](https://img.shields.io/badge/JSDoc-Documented-F7DF1E?style=flat&logo=javascript&logoColor=black)
+
+</div>
 
 ---
 
+This repository contains a student-developed project,
+created as part of the Brainster curriculum under the mentorship of Danica Tundjova.
 A web-based platform for the **Еволуција на Сонот** arts and culture festival held in Macedonia. The platform serves as a public information hub and an artist application management system, combining a Macedonian Cyrillic public frontend with a dedicated admin panel for festival organizers.
 
 ---
@@ -61,8 +71,10 @@ A web-based platform for the **Еволуција на Сонот** arts and cul
 | Public CSS    | Tailwind CSS 4 + `@tailwindcss/forms` |
 | Admin CSS     | Bootstrap 5.3.8                       |
 | Validation    | Javascript                            |
+| Documentation | PHPDoc, JSDoc & Laravel Docs          |
 | Build tool    | Vite 8                                |
 | Mail testing  | Mailpit                               |
+| Icons         | Font Awesome 6 (SVG & Webfont)        |
 | Font          | Fira Sans (Google Fonts)              |
 
 ---
@@ -203,6 +215,9 @@ php artisan storage:link
 
 Place your image assets in `storage/app/public/images/`. The following files are expected by the views:
 
+<details>
+<summary>Click to expand</summary>
+
 ```
 nav-logo.svg          - Navbar dandelion logo
 footer-logo.svg       - Footer dandelion logo
@@ -229,6 +244,8 @@ edition-3.jpg         - Blog edition 3
 topo-pattern.svg      - Art City hero background
 ...
 ```
+
+</details>
 
 ### 9. Build front-end assets
 
@@ -295,7 +312,7 @@ The admin panel is accessible at `/admin` and is **not linked** in the public na
 
 **Key admin flows:**
 
-1. Log in at `/admin/login`
+1. Log in at `/admin or /login`
 2. Dashboard shows all approved applications grouped by year
 3. Pending applications at `/admin/applications/pending`
 4. Click **Прегледај** on any application to open the review page
@@ -307,59 +324,203 @@ The admin panel is accessible at `/admin` and is **not linked** in the public na
 
 ## Project Structure
 
-```
-app/
-├-- Http/
-│   ├-- Controllers/
-│   │   ├-- Admin/
-│   │   │   ├-- ApplicationController.php
-│   │   │   ├-- DashboardController.php
-│   │   │   └-- ProfileController.php
-│   │   ├-- ApplicationController.php
-│   │   ├-- ArtCityController.php
-│   │   ├-- BlogController.php
-│   │   ├-- HomeController.php
-│   │   └-- WorkWithUsController.php
-│   └-- Requests/
-│       ├-- ReviewApplicationRequest.php
-│       └-- StoreArtistApplicationRequest.php
-├-- Mail/
-│   ├-- ApplicationReceived.php
-│   └-- ApplicationReviewed.php
-└-- Models/
-    ├-- AdminProfile.php
-    ├-- ArtistApplication.php
-    └-- User.php
+<details>
+<summary>Click to expand project structure</summary>
 
-resources/
-├-- css/
-│   ├-- main.css       ← Tailwind (public pages)
-│   └-- admin.css      ← Bootstrap (admin panel)
-├-- js/
-│   ├-- navbar.js      ← Mobile/Tablet navigation menu (Hamburger menu)
-│   ├-- notifications.js  ← Toastr notification alerts
-│   ├-- slider.js      ← Images (Home, Blog)
-│   └-- validation.js  ← Artist form frontend validation
-└-- views/
-    ├-- admin/
-    ├-- emails/
-    ├-- layouts/
-    │   ├-- app.blade.php      ← Public layout
-    │   └-- admin.blade.php    ← Admin layout
-    ├-- partials/
-    │   ├-- navbar.blade.php
-    │   └-- footer.blade.php
-    ├-- home.blade.php
-    ├-- art-city.blade.php
-    ├-- blog.blade.php
-    └-- work-with-us.blade.php
-
-database/
-├-- migrations/
-└-- seeders/
-    ├-- AdminUserSeeder.php
-    └-- DatabaseSeeder.php
 ```
+.
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── Admin
+│   │   │   │   ├── ApplicationController.php
+│   │   │   │   ├── DashboardController.php
+│   │   │   │   └── ProfileController.php
+│   │   │   ├── ApplicationController.php
+│   │   │   ├── ArtCityController.php
+│   │   │   ├── BlogController.php
+│   │   │   ├── HomeController.php
+│   │   │   ├── ProfileController.php
+│   │   │   └── WorkWithUsController.php
+│   │   └── Requests
+│   │       ├── Auth
+│   │       │   └── LoginRequest.php
+│   │       ├── ProfileUpdateRequest.php
+│   │       ├── ReviewApplicationRequest.php
+│   │       └── StoreArtistApplicationRequest.php
+│   ├── Mail
+│   │   ├── ApplicationReceived.php
+│   │   └── ApplicationReviewed.php
+│   ├── Models
+│   │   ├── AdminProfile.php
+│   │   ├── ArtistApplication.php
+│   │   └── User.php
+│   ├── migrations
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 0001_01_01_000002_create_jobs_table.php
+│   │   ├── 2026_04_01_133523_create_artist_applications_table.php
+│   │   └── 2026_04_01_133541_create_admin_profiles_table.php
+│   ├── seeders
+│   │   ├── AdminUserSeeder.php
+│   │   └── DatabaseSeeder.php
+├── resources
+│   ├── css
+│   │   ├── admin.css
+│   │   └── main.css
+│   ├── js
+│   │   ├── app.js
+│   │   ├── bootstrap.js
+│   │   ├── map-init.js
+│   │   ├── navbar.js
+│   │   ├── notifications.js
+│   │   ├── slider.js
+│   │   └── validation.js
+│   └── views
+│       ├── admin
+│       │   ├── applications
+│       │   │   ├── all.blade.php
+│       │   │   ├── pending.blade.php
+│       │   │   └── show.blade.php
+│       │   ├── profile
+│       │   │   └── edit.blade.php
+│       │   └── dashboard.blade.php
+│       ├── auth
+│       │   ├── confirm-password.blade.php
+│       │   ├── forgot-password.blade.php
+│       │   ├── login.blade.php
+│       │   ├── register.blade.php
+│       │   ├── reset-password.blade.php
+│       │   └── verify-email.blade.php
+│       ├── components
+│       │   ├── ui
+│       │   │   └── button.blade.php
+│       ├── emails
+│       │   ├── application-received.blade.php
+│       │   └── application-reviewed.blade.php
+│       ├── layouts
+│       │   ├── partials
+│       │   │   └── admin-nav-content.blade.php
+│       │   ├── admin.blade.php
+│       │   ├── app.blade.php
+│       │   ├── guest.blade.php
+│       │   └── navigation.blade.php
+│       ├── pages
+│       │   ├── art-city.blade.php
+│       │   ├── blog.blade.php
+│       │   ├── home.blade.php
+│       │   └── work-with-us.blade.php
+│       ├── partials
+│       │   ├── icons
+│       │   │   ├── facebook.blade.php
+│       │   │   ├── instagram.blade.php
+│       │   │   └── youtube.blade.php
+│       │   ├── svg
+│       │   │   ├── blueblob.blade.php
+│       │   │   ├── clouds-blog.blade.php
+│       │   │   ├── clouds.blade.php
+│       │   │   ├── cloudsleft.blade.php
+│       │   │   ├── cloudsleft1.blade.php
+│       │   │   ├── dandelion-footer.blade.php
+│       │   │   ├── dandelion.blade.php
+│       │   │   ├── drop.blade.php
+│       │   │   ├── droplet.blade.php
+│       │   │   ├── insta-blob-1.blade.php
+│       │   │   ├── insta-blob-2.blade.php
+│       │   │   ├── ipad-bg.blade.php
+│       │   │   ├── leaf-blog.blade.php
+│       │   │   ├── leaf.blade.php
+│       │   │   └── work-with-us-blob.blade.php
+│       │   ├── flash.blade.php
+│       │   ├── flash.blade.php.bak
+│       │   ├── footer.blade.php
+│       │   └── navbar.blade.php
+│       ├── profile
+│       │   ├── partials
+│       │   │   ├── delete-user-form.blade.php
+│       │   │   ├── update-password-form.blade.php
+│       │   │   └── update-profile-information-form.blade.php
+│       │   └── edit.blade.php
+├── routes
+│   ├── auth.php
+│   ├── console.php
+│   └── web.php
+├── storage
+│   ├── app
+│   │   ├── private
+│   │   │   └── .gitignore
+│   │   ├── public
+│   │   │   ├── images
+│   │   │   │   ├── art-city-1.png
+│   │   │   │   ├── art-city-1.svg
+│   │   │   │   ├── art-city-1.webp
+│   │   │   │   ├── art-city-2.png
+│   │   │   │   ├── art-city-2.webp
+│   │   │   │   ├── art-city-3.png
+│   │   │   │   ├── art-city-3.webp
+│   │   │   │   ├── art-city-4.png
+│   │   │   │   ├── art-city-4.webp
+│   │   │   │   ├── art-city-5.png
+│   │   │   │   ├── art-city-5.webp
+│   │   │   │   ├── art-city-hero.png
+│   │   │   │   ├── art-city-hero.webp
+│   │   │   │   ├── art-city-map.svg
+│   │   │   │   ├── artist-1.png
+│   │   │   │   ├── artist-1.webp
+│   │   │   │   ├── artist-2.png
+│   │   │   │   ├── artist-2.webp
+│   │   │   │   ├── artist-3.png
+│   │   │   │   ├── artist-3.webp
+│   │   │   │   ├── artist-4.png
+│   │   │   │   ├── artist-4.webp
+│   │   │   │   ├── artist-5.png
+│   │   │   │   ├── artist-5.webp
+│   │   │   │   ├── bg-mobile-home-white.svg
+│   │   │   │   ├── blueblob.svg
+│   │   │   │   ├── clouds-blog.svg
+│   │   │   │   ├── clouds-left.svg
+│   │   │   │   ├── clouds-left1.svg
+│   │   │   │   ├── clouds.svg
+│   │   │   │   ├── droplet.svg
+│   │   │   │   ├── edition-1.png
+│   │   │   │   ├── edition-1.webp
+│   │   │   │   ├── edition-2.png
+│   │   │   │   ├── edition-2.webp
+│   │   │   │   ├── edition-3.png
+│   │   │   │   ├── edition-3.webp
+│   │   │   │   ├── event-1.svg
+│   │   │   │   ├── event-2.svg
+│   │   │   │   ├── event-3.svg
+│   │   │   │   ├── footer-logo.svg
+│   │   │   │   ├── galery-1.jpg
+│   │   │   │   ├── hero-face.png
+│   │   │   │   ├── hero-face.webp
+│   │   │   │   ├── insta-1.svg
+│   │   │   │   ├── insta-2.svg
+│   │   │   │   ├── insta-3.svg
+│   │   │   │   ├── insta-4.svg
+│   │   │   │   ├── insta-blob-1.svg
+│   │   │   │   ├── insta-blob-2.svg
+│   │   │   │   ├── ipad-bg.svg
+│   │   │   │   ├── latest-news-1.svg
+│   │   │   │   ├── latest-news-2.svg
+│   │   │   │   ├── latest-news-3.svg
+│   │   │   │   ├── leaf-blog.svg
+│   │   │   │   ├── leaf.svg
+│   │   │   │   ├── nav-logo.svg
+│   │   │   │   ├── program-sub.svg
+│   │   │   │   ├── video-bg.svg
+│   │   │   │   └── work-with-us-blob.svg
+│   │   │   ├── uploads
+│   │   │   │   └── .gitkeep
+│   │   │   ├── video
+│   │   │   │   ├── video-insta.mp4
+│   │   │   │   └── video.mp4
+│   │   │   └── .gitignore
+│   │   └── .gitignore
+```
+
+</details>
 
 ---
 

@@ -1,7 +1,5 @@
-// resources/js/notifications.js
-
 export function initNotifications() {
-    // 1. Configure Toastr defaults
+    // Configure Toastr defaults
     toastr.options = {
         closeButton: true,
         progressBar: true,
@@ -9,7 +7,7 @@ export function initNotifications() {
         timeOut: "5000",
     };
 
-    // 2. Look for our "data provider" elements
+    // Look for our "data provider" elements
     const successMessage =
         document.getElementById("flash-success-data")?.dataset.message;
     const errorMessage =
@@ -18,7 +16,7 @@ export function initNotifications() {
         ".flash-validation-error",
     );
 
-    // 3. Trigger Toastr based on what we find
+    // Trigger Toastr based on what we find
     if (successMessage) {
         toastr.success(successMessage);
     }

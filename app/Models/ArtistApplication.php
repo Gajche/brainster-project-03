@@ -53,6 +53,22 @@ class ArtistApplication extends Model
 		return $query->where('status', 'approved');
 	}
 
+	/**
+	 * Scope: Filter applications by name, email, or phone.
+	 */
+	public function scopeSearch(Builder $query, ?string $term): Builder
+	{
+		return $query->when($term, function ($q, $term) {
+			$like = '%' . $term . '%';
+			$q->where(function ($sub) use ($like) {
+				$sub->where('name', 'like', $like)
+					->orWhere('surname', 'like', $like)
+					->orWhere('email', 'like', $like)
+					->orWhere('phone', 'like', $like);
+			});
+		});
+	}
+
 	// Helper: is this application from the current year?
 	public function isCurrentYear(): bool
 	{

@@ -1,5 +1,3 @@
-{{-- resources/views/partials/navbar.blade.php --}}
-
 <nav class="bg-white lg:sticky top-0 z-50 border-b border-black/5 py-6 h-auto w-full">
 
 	<div class="relative z-10 max-w-7xl mx-auto h-full flex items-center justify-between ps-36 pe-6">

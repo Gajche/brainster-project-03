@@ -59,16 +59,6 @@
             </div>
         </div>
 
-        {{-- <div class="admin-content">
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-            @yield('content')
-        </div> --}}
-
 				<div class="admin-content">
           {{-- Unified Flash Messages (Toastr logic) --}}
           @include('partials.flash')

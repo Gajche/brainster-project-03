@@ -1,5 +1,3 @@
-{{-- resources/views/partials/footer.blade.php --}}
-
 <footer class="bg-white border-t-4 border-gray-400 lg:py-6 xs:py-3 relative overflow-visible z-10">
 
 	<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">

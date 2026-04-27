@@ -1,4 +1,3 @@
-{{-- resources/views/work-with-us.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Работи со нас - Еволуција на Сонот')
 
@@ -6,19 +5,12 @@
 
 <section class="relative py-20 bg-cream overflow-visible">
 
-	{{-- <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-50">
-		<div class="max-w-7xl mx-auto px-6 h-full relative">
-			<div x-data class="dandelion-wrap pointer-events-none">
-				@include('partials.svg.dandelion')
-			</div>
-		</div>
-	</div> --}}
-
+	{{-- Dandelion --}}
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-100">
-        <div x-data class="dandelion-wrap pointer-events-none">
-            @include('partials.svg.dandelion')
-        </div>
+    <div x-data class="dandelion-wrap pointer-events-none">
+      @include('partials.svg.dandelion')
     </div>
+  </div>
 
 	<div class="max-w-7xl mx-auto px-6">
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">

@@ -1,4 +1,3 @@
-{{-- resources/views/blog.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Повеќе за нас - Еволуција на Сонот')
 
@@ -114,7 +113,7 @@
     </div>
 </section>
 
-{{-- CTA --}}
+{{-- CTA - Call to action --}}
 <section class="py-40 bg-cream text-center relative">
     {{-- SVGs --}}
     <div class="hidden lg:block absolute right-0 -top-[18vw] w-[35%] pointer-events-none z-10">

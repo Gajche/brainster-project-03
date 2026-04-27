@@ -8,13 +8,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
 	public function edit()
 	{
 		/** @var User $user */
-		$user    = Auth::user();
+		$user = Auth::user();
+
 		$profile = $user->adminProfile ?? new AdminProfile(['user_id' => $user->id]);
 
 		return view('admin.profile.edit', compact('user', 'profile'));
@@ -31,21 +33,33 @@ class ProfileController extends Controller
 			'city'       => 'nullable|string|max:100',
 		]);
 
+		/** @var User $user */
+		$user = Auth::user();
+
 		try {
-			/** @var User $user */
-			$user = Auth::user();
+			// Transaction ensures both updates happen or neither happens
+			DB::transaction(function () use ($request, $user) {
 
-			User::where('id', $user->id)->update(['name' => $request->name]);
+				// Update the User model directly
+				$user->update(['name' => $request->name]);
 
-			AdminProfile::updateOrCreate(
-				['user_id' => $user->id],
-				$request->only(['first_name', 'last_name', 'phone', 'address', 'city'])
-			);
+				// Update or Create the Profile
+				$user->adminProfile()->updateOrCreate(
+					['user_id' => $user->id],
+					$request->only(['first_name', 'last_name', 'phone', 'address', 'city'])
+				);
+			});
 
 			return back()->with('success', 'Профилот е успешно ажуриран.');
 		} catch (\Throwable $e) {
-			Log::error('Profile update error', ['error' => $e->getMessage()]);
-			return back()->withErrors(['error' => 'Грешка при ажурирање на профилот.']);
+			// Report for monitoring and log for local debugging
+			report($e);
+
+			Log::error("Profile update failed for User #{$user->id}", [
+				'error' => $e->getMessage()
+			]);
+
+			return back()->withErrors(['error' => 'Настана грешка при зачувување на податоците.']);
 		}
 	}
 }

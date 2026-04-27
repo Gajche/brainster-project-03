@@ -5,67 +5,42 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArtistApplicationRequest;
 use App\Mail\ApplicationReceived;
 use App\Models\ArtistApplication;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
 	public function store(StoreArtistApplicationRequest $request): RedirectResponse
 	{
 		try {
+			// Validation handles the file type and security automatically
 			$data = $request->validated();
 
-			// Handle PDF portfolio upload
+			// Handle File Upload
 			if ($request->hasFile('portfolio')) {
-				$file = $request->file('portfolio');
-
-				// Extra security check on mime type (beyond validation)
-				if ($file->getMimeType() !== 'application/pdf') {
-					return back()->withErrors(['portfolio' => 'Само PDF датотеки се дозволени.'])->withInput();
-				}
-
-				// Store in storage/app/public/uploads with a unique name
-				$path = $file->store('uploads', 'public');
-				$data['portfolio_path'] = $path;
+				$data['portfolio_path'] = $request->file('portfolio')->store('uploads', 'public');
 			}
 
-			// Tag the application with the current year
 			$data['year']   = now()->year;
 			$data['status'] = 'pending';
 
+			// Create record
 			$application = ArtistApplication::create($data);
 
-			// Send confirmation email to artist - wrapped in try-catch
-			// so mail failure does not roll back the application
+			// Send Email
+			// (use ->queue() instead of ->send())
+			// If you use queue(), you can remove the inner try-catch entirely!
 			try {
 				Mail::to($application->email)->send(new ApplicationReceived($application));
 			} catch (\Throwable $mailException) {
-				Log::error('Failed to send ApplicationReceived email', [
-					'application_id' => $application->id,
-					'error'          => $mailException->getMessage(),
-				]);
-				// Do NOT re-throw - application is saved, just log the mail failure
+				report($mailException); // Tell the system the mail failed, but keep going
 			}
 
-			// ----------------------
-
-			// try {
-			// 	Mail::to($application->email)
-			// 		->send(new ApplicationReceived($application));
-			// } catch (\Throwable $mailException) {
-			// 	Log::error('Mail failed', [
-			// 		'error' => $mailException->getMessage(),
-			// 	]);
-			// }
-
 			return redirect()->route('work-with-us')
-				->with('success', 'Вашата пријава е успешно испратена! Ќе добиете потврда на е-пошта.');
+				->with('success', 'Вашата пријава е успешно испратена!');
 		} catch (\Throwable $e) {
-			Log::error('Failed to store artist application', [
-				'error' => $e->getMessage(),
-				'trace' => $e->getTraceAsString(),
-			]);
+			report($e); // Send to your error monitoring service
 
 			return back()
 				->withInput()

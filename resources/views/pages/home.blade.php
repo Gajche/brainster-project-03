@@ -1,11 +1,10 @@
-{{-- resources/views/home.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Дома - Еволуција на Сонот')
 
 @section('content')
 
 {{-- HERO --}}
-<section class="relative min-h-[calc(100vh-89px)] lg:min-h-[calc(100dvh-85px)] flex items-center bg-cream">
+<section class="relative min-h-[calc(100vh-89px)] lg:min-h-[calc(100vh-85px)] qhd flex items-center bg-cream">
 
 	{{-- Dandelion --}}
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-100">
@@ -29,7 +28,7 @@
 	{{-- Content Container --}}
 	<div class="relative z-20 max-w-7xl mx-auto w-full px-6 py-20">
 
-		<div class="relative w-full  flex flex-col lg:bg-transparent lg:p-2 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0">
+		<div class="relative w-full flex flex-col lg:bg-transparent lg:p-0 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0 lg:-translate-y-10">
 
 			<div class="absolute inset-0 lg:hidden xs:block xxs:block -z-10 mx-0 px-0">
 				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"
@@ -49,7 +48,7 @@
 				Редефинирај ја реалноста
 			</p>
 
-			<h1 class="text-2xl md:text-5xl lg:text-6xl font-bold uppercase text-ev-dark mb-6 leading-tight">
+			<h1 class="text-2xl md:text-5xl lg:text-6xl font-bold uppercase text-ev-dark mb-6">
 				Еволуција на Сонот
 			</h1>
 
@@ -312,7 +311,7 @@
 		</div>
 	</div>
 
-	{{-- Layered Decorative SVGs (z-10) --}}
+	{{-- Layered Decorative SVGs --}}
 	<div class="hidden lg:block absolute right-[15%] bottom-[10vw] w-[35%] pointer-events-none z-10">
 		@include('partials.svg.clouds-blog')
 	</div>

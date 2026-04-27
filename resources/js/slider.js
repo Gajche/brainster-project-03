@@ -1,5 +1,3 @@
-// resources/js/slider.js
-
 document.addEventListener("alpine:init", () => {
     Alpine.data("eventSlider", () => ({
         active: 0,

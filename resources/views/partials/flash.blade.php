@@ -1,5 +1,3 @@
-{{-- resources/views/partials/flash.blade.php --}}
-
 <div id="flash-messages" class="hidden" aria-hidden="true">
     {{-- Success Message --}}
     @if(session('success'))

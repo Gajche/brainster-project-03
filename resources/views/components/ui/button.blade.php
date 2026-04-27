@@ -1,4 +1,3 @@
-<!-- resources/views/components/ui/button.blade.php -->
 @props([
 'type' => 'button',
 'href' => null,
@@ -6,10 +5,10 @@
 ])
 
 @php
-// We define the standard "Global" size and font here
-$standardSize = 'w-[140px] h-[36px] font-[16px]';
+// Define the standard "Global" size and font here
+$standardSize = 'w-32 h-8 font-normal text-lg';
 
-$baseClasses = 'inline-flex items-center justify-center font-medium rounded-[10px] transition-all duration-200 no-underline cursor-pointer disabled:opacity-50 ' . $standardSize;
+$baseClasses = 'inline-flex items-center justify-center rounded-md transition-all duration-200 no-underline cursor-pointer disabled:opacity-50 ' . $standardSize;
 
 $variants = [
 'primary' => 'btn-prijavi-nav text-white hover:opacity-90',

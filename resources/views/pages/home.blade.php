@@ -28,7 +28,7 @@
 	{{-- Content Container --}}
 	<div class="relative z-20 max-w-7xl mx-auto w-full px-6 py-20">
 
-		<div class="relative w-full flex flex-col lg:bg-transparent lg:p-0 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0 lg:-translate-y-10">
+		<div class="relative w-full flex flex-col lg:bg-transparent lg:p-0 pt-8 md:pt-16 px-6 pb-0 xxs:mt-30 xs:mt-44 md:mt-100 lg:mt-0 lg:-translate-y-10">
 
 			{{-- <div class="absolute inset-0 lg:hidden xs:block xxs:block -z-10 mx-0 px-0">
 				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"

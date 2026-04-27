@@ -149,46 +149,44 @@
 }
 
 /* Footer Dandelion Positioning */
-.dandelion-footer-wrap {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-
-    /* Mobile Defaults */
-    left: 16px;
-    top: -62px; /* Pulls it up over the border */
-    width: 40px;
-}
-
-@media (min-width: 768px) {
-    /* Tablet */
+@layer utilities {
     .dandelion-footer-wrap {
-        left: 24px;
-        top: -34px;
-        width: 70px;
-        overflow: hidden;
+        position: absolute;
+        pointer-events: none;
+        z-index: 20; /* Ensure it sits above the border */
+        overflow: visible;
+
+        /* Mobile Defaults */
+        /* left: 16px; */
+        /* top: -82px;  */
+        /* width: 45px; */
     }
-}
 
-@media (min-width: 1024px) {
-    /* Desktop  */
-    .dandelion-footer-wrap {
-        left: 24px;
-        top: -34px;
-        width: 90px;
-        overflow: hidden;
+    @media (min-width: 320px) {
+        /* Mobile */
+        .dandelion-footer-wrap {
+            left: 16px;
+            top: -82px;
+            width: 45px;
+        }
     }
-}
 
-@media (min-width: 1440px) {
-    /* Desktop  */
-    .dandelion-footer-wrap {
-        left: 184px;
-        top: -34px;
-        width: 90px;
-        /* height: auto; */
-        overflow: hidden;
+    @media (min-width: 768px) {
+        /* Tablet */
+        .dandelion-footer-wrap {
+            left: 24px;
+            top: -40px;
+            width: 70px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        /* Desktop (1024, 1440, 2560+) */
+        .dandelion-footer-wrap {
+            /* padding-left: 0px; */
+            top: -60px;
+            width: 90px;
+        }
     }
 }
 

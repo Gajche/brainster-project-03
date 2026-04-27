@@ -14,7 +14,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto lg:px-6">
-        <div class="relative min-h-[calc(50vh-89px)] lg:h-[calc(100dvh-85px)] flex items-center overflow-hidden">
+        <div class="relative min-h-[calc(50vh-89px)] lg:h-[calc(100vh-81px)] flex items-center overflow-hidden">
             {{-- Background Image --}}
             <div class="absolute inset-0 z-0">
                 <img src="{{ asset('storage/images/art-city-hero.webp') }}" 

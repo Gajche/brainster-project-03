@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- HERO --}}
-<section class="relative min-h-[calc(100vh-89px)] lg:min-h-[calc(100vh-85px)] qhd flex items-center bg-cream">
+<section class="relative min-h-[calc(100vh-89px)] lg:min-h-[calc(100vh-81px)] qhd flex items-center bg-cream">
 
 	{{-- Dandelion --}}
 	<div class="absolute inset-0 max-w-7xl mx-auto w-full px-6 pointer-events-none z-100">
@@ -30,16 +30,16 @@
 
 		<div class="relative w-full flex flex-col lg:bg-transparent lg:p-0 pt-12 md:pt-16 px-6 pb-10 xxs:mt-30 xs:mt-48 md:mt-100 lg:mt-0 lg:-translate-y-10">
 
-			<div class="absolute inset-0 lg:hidden xs:block xxs:block -z-10 mx-0 px-0">
+			{{-- <div class="absolute inset-0 lg:hidden xs:block xxs:block -z-10 mx-0 px-0">
 				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"
 					class="w-full h-full object-fill"
 					alt="bg-mobile"
 					loading="lazy"
 					decoding="async">
-			</div>
+			</div> --}}
 
 			{{-- Tablet SVG Background --}}
-			<div class="absolute inset-0 hidden md:block lg:hidden -z-10">
+			<div class="absolute inset-0 hidden md:block xs:block lg:hidden -z-10 mx-0 px-0">
 				@include('partials.svg.ipad-bg')
 			</div>
 
@@ -52,7 +52,7 @@
 				Еволуција на Сонот
 			</h1>
 
-			<p class="lg:text-base xs:text-sm xxs:text-sm text-ev-dark max-w-115 mb-8">
+			<p class="lg:text-base md:text-base xs:text-md xxs:text-sm text-ev-dark max-w-115 mb-8">
 				Ако сакаш да бидеш дел и ти, приклучи се кон заедницата
 				што создава, соработува и ја обликува современата
 				културна сцена.
@@ -75,7 +75,7 @@
 		@include('partials.svg.blueblob')
 	</div>
 
-	<div class="relative z-20 max-w-7xl mx-auto px-6">
+	<div class="relative z-20 max-w-7xl mx-auto px-6 md:px-12">
 		<div class="flex">
 			<div class="ml-auto w-full lg:w-[60%]">
 
@@ -83,7 +83,7 @@
 					ЗА НАС
 				</h2>
 
-				<p class="lg:text-base xs:text-sm text-ev-dark">
+				<p class="lg:text-base md:text-base xs:text-sm text-ev-dark">
 					Еволуција на сонот е независна културна организација посветена на развојот на современата уметност и креативните практики во јавен простор. Преку интердисциплинарни проекти, фестивали и меѓународни соработки, организацијата создава платформа за културна размена, уметничко изразување и одржлив културен развој, со фокус на локалната заедница и нејзиното поврзување со глобалната уметничка сцена.
 				</p>
 

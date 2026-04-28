@@ -32,6 +32,7 @@ class ApplicationController extends Controller
 		$search = $request->input('search');
 
 		$applications = ArtistApplication::pending()
+			->withoutTrashed()
 			->search($search)
 			->orderByDesc('created_at')
 			->paginate(15)
@@ -126,7 +127,7 @@ class ApplicationController extends Controller
 	{
 		$search = $request->input('search');
 
-		$applications = ArtistApplication::query()
+		$applications = ArtistApplication::withoutTrashed()
 			->search($search)
 			->orderByDesc('created_at')
 			->paginate(20)

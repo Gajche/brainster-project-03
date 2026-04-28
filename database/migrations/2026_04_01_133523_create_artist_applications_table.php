@@ -22,37 +22,38 @@ return new class extends Migration
 			$table->string('social_media', 500)->nullable();
 
 			// Application content
-			$table->string('collaboration_area', 255);  // "Во која област..."
-			$table->text('message');                     // Short message
-			$table->string('portfolio_path', 500)->nullable(); // PDF file path
+			$table->string('collaboration_area', 255);
+			$table->text('message');
+			$table->string('portfolio_path', 500)->nullable();
 
-			// Submission year - used for year-restriction logic
+			// Submission year
 			$table->unsignedSmallInteger('year');
 
 			// Status: pending | approved | rejected
 			$table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
-			// Admin response fields (filled when admin reviews)
+			// Admin response fields
 			$table->text('admin_response')->nullable();
 			$table->timestamp('responded_at')->nullable();
-			$table->unsignedBigInteger('responded_by')->nullable(); // FK to users.id
+			$table->unsignedBigInteger('responded_by')->nullable();
 
 			$table->timestamps();
 
-			// Indexes for admin search functionality
+			// 'deleted_at' column
+			$table->softDeletes();
+
+			// Indexes
 			$table->index(['name', 'surname']);
 			$table->index('email');
 			$table->index('phone');
-			$table->index(['status', 'year']);
+			// Modified index to include deleted_at for faster dashboard queries
+			$table->index(['status', 'year', 'deleted_at']);
 
-			// Foreign key for admin who reviewed
+			// Foreign key
 			$table->foreign('responded_by')->references('id')->on('users')->nullOnDelete();
 		});
 	}
 
-	/**
-	 * Reverse the migrations.
-	 */
 	public function down(): void
 	{
 		Schema::dropIfExists('artist_applications');

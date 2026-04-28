@@ -1,5 +1,5 @@
 <img src="{{ asset('storage/images/insta-blob-1.svg') }}"
 	alt="insta-blob-1"
-	loading="lazy"
+	{{-- loading="lazy" --}}
 	decoding="async"
 	class="w-auto h-auto pointer-events-none">

@@ -44,6 +44,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 	Route::post('/applications/{application}/review', [AdminApplicationController::class, 'review'])
 		->name('applications.review');
 
+	Route::delete('/applications/{application}', [AdminApplicationController::class, 'destroy'])
+		->name('applications.destroy');
+
 	// Admin profile
 	Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
 	Route::patch('/profile', [AdminProfileController::class, 'update'])->name('profile.update');

@@ -1,5 +1,5 @@
 <img src="{{ asset('storage/images/blueblob.svg') }}"
 	alt="blue blob"
-	loading="lazy"
+	{{-- loading="lazy" --}}
 	decoding="async"
 	class="w-auto h-auto pointer-events-none">

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ArtistApplication extends Model
 {
-	// Mass assignment protection - only these fields are fillable
+	use SoftDeletes;
 	protected $fillable = [
 		'name',
 		'surname',
@@ -29,33 +31,42 @@ class ArtistApplication extends Model
 		'year'         => 'integer',
 	];
 
-	// Relationship: admin who responded
+	/**
+	 * We use this to clear the dashboard cache whenever data changes.
+	 */
+	protected static function booted()
+	{
+		// This runs for Create and Update
+		static::saved(function () {
+			Cache::forget('admin_stats');
+		});
+
+		// This runs for Delete
+		static::deleted(function () {
+			Cache::forget('admin_stats');
+		});
+	}
+
 	public function respondedBy()
 	{
 		return $this->belongsTo(User::class, 'responded_by');
 	}
 
-	// Scope: only pending applications
 	public function scopePending(Builder $query): Builder
 	{
 		return $query->where('status', 'pending');
 	}
 
-	// Scope: only current year - used for year restriction
 	public function scopeCurrentYear(Builder $query): Builder
 	{
 		return $query->where('year', now()->year);
 	}
 
-	// Scope: approved applications
 	public function scopeApproved(Builder $query): Builder
 	{
 		return $query->where('status', 'approved');
 	}
 
-	/**
-	 * Scope: Filter applications by name, email, or phone.
-	 */
 	public function scopeSearch(Builder $query, ?string $term): Builder
 	{
 		return $query->when($term, function ($q, $term) {
@@ -69,13 +80,11 @@ class ArtistApplication extends Model
 		});
 	}
 
-	// Helper: is this application from the current year?
 	public function isCurrentYear(): bool
 	{
 		return $this->year === now()->year;
 	}
 
-	// Helper: is this application still pending?
 	public function isPending(): bool
 	{
 		return $this->status === 'pending';

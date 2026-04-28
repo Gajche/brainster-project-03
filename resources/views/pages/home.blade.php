@@ -223,7 +223,9 @@
                 <div class="event-card absolute inset-0" :class="getCardClass({{ $index }})">
                     <div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
                         <img src="{{ asset($event['image']) }}" 
-                              alt="{{ $event['title'] }}" 
+                              alt="{{ $event['title'] }}"
+															loading="lazy"
+															decoding="async" 
                               class="w-full h-full object-cover">
 
                         <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 pb-6 md:hidden">

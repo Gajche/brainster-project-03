@@ -17,14 +17,16 @@ class ProfileController extends Controller
 		/** @var User $user */
 		$user = Auth::user();
 
-		$profile = $user->adminProfile ?? new AdminProfile(['user_id' => $user->id]);
+		// Ensure the profile exists so the view doesn't have to handle 'null'
+		$profile = $user->adminProfile ?: new AdminProfile();
 
 		return view('admin.profile.edit', compact('user', 'profile'));
 	}
 
 	public function update(Request $request)
 	{
-		$request->validate([
+		// Assign validation to a variable
+		$validated = $request->validate([
 			'name'       => 'required|string|max:255',
 			'first_name' => 'nullable|string|max:100',
 			'last_name'  => 'nullable|string|max:100',
@@ -37,29 +39,36 @@ class ProfileController extends Controller
 		$user = Auth::user();
 
 		try {
-			// Transaction ensures both updates happen or neither happens
-			DB::transaction(function () use ($request, $user) {
+			DB::transaction(function () use ($validated, $user) {
+				// Update basic User info
+				$user->update(['name' => $validated['name']]);
 
-				// Update the User model directly
-				$user->update(['name' => $request->name]);
-
-				// Update or Create the Profile
+				// Update or Create the Profile using validated data
 				$user->adminProfile()->updateOrCreate(
 					['user_id' => $user->id],
-					$request->only(['first_name', 'last_name', 'phone', 'address', 'city'])
+					[
+						'first_name' => $validated['first_name'],
+						'last_name'  => $validated['last_name'],
+						'phone'      => $validated['phone'],
+						'address'    => $validated['address'],
+						'city'       => $validated['city'],
+					]
 				);
 			});
 
 			return back()->with('success', 'Профилот е успешно ажуриран.');
 		} catch (\Throwable $e) {
-			// Report for monitoring and log for local debugging
-			report($e);
-
-			Log::error("Profile update failed for User #{$user->id}", [
-				'error' => $e->getMessage()
+			// Contextual Logging
+			Log::withContext([
+				'user_id' => $user->id,
+				'payload' => $request->except(['_token', '_method'])
 			]);
 
-			return back()->withErrors(['error' => 'Настана грешка при зачувување на податоците.']);
+			report($e);
+
+			return back()
+				->withInput()
+				->withErrors(['error' => 'Настана грешка при зачувување на податоците.']);
 		}
 	}
 }

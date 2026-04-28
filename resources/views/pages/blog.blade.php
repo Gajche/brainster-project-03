@@ -39,7 +39,12 @@
             @foreach($news as $index => $item)
             <div class="event-card absolute inset-0" :class="getCardClass({{ $index }})">
                 <div class="relative rounded-3xl overflow-hidden shadow-lg h-full border border-gray-100">
-                    <img src="{{ asset($item['image']) }}" alt="{{ $item['title'] }}" loading="lazy" class="w-full h-full object-cover">
+                    <img src="{{ asset($item['image']) }}" 
+										alt="{{ $item['title'] }}" 
+										loading="lazy" 
+										decoding="async"
+										class="w-full h-full object-cover">
+
                     <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-white/80 uppercase">
                         <h5 class="font-bold text-base text-ev-dark mb-1">{{ $item['title'] }}</h5>
                         <small class="text-gray-600 text-xs flex items-center gap-1">
@@ -60,7 +65,7 @@
 {{-- PREVIOUS EDITIONS --}}
 <section class="py-10 lg:py-20 bg-cream relative">
     {{-- Clouds --}}
-        {{-- Layered Decorative SVG --}}
+    {{-- Layered Decorative SVG --}}
     <div class="decorative-wrapper">
       <div class="decorative-svg blog-clouds-pos">
           @include('partials.svg.cloudsleft1')
@@ -68,7 +73,7 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-20">
-        <h2 class="text-center text-lg lg:text-3xl font-bold uppercase tracking-wide text-ev-dark mb-12">
+        <h2 class="text-center text-lg lg:text-3xl font-bold uppercase text-ev-dark mb-12">
             Погледни што се случуваше изминатите години
         </h2>
 

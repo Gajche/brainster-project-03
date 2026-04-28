@@ -11,13 +11,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class ApplicationController
+ * * Handles the administrative tasks for artist applications, including
+ * listing, viewing, reviewing, and deleting submissions.
+ */
 class ApplicationController extends Controller
 {
 	/**
-	 * List of pending applications - admin can search.
+	 * Display a paginated list of pending artist applications.
+	 *
+	 * @param Request $request
+	 * @return View
 	 */
-	public function pending(Request $request)
+	public function pending(Request $request): View
 	{
 		$search = $request->input('search');
 
@@ -31,20 +41,29 @@ class ApplicationController extends Controller
 	}
 
 	/**
-	 * Show a single application.
+	 * Display the details of a specific artist application.
+	 *
+	 * @param ArtistApplication $application
+	 * @return View
 	 */
-	public function show(ArtistApplication $application)
+	public function show(ArtistApplication $application): View
 	{
 		return view('admin.applications.show', compact('application'));
 	}
 
 	/**
-	 * Review (approve or reject) an application.
-	 * YEAR RESTRICTION: only current-year pending applications can be actioned.
+	 * Review and process an artist application (Approve or Reject).
+	 *
+	 * Updates the application status, logs the admin response, 
+	 * and sends a notification email to the applicant.
+	 *
+	 * @param ReviewApplicationRequest $request
+	 * @param ArtistApplication $application
+	 * @return RedirectResponse
 	 */
-	public function review(ReviewApplicationRequest $request, ArtistApplication $application)
+	public function review(ReviewApplicationRequest $request, ArtistApplication $application): RedirectResponse
 	{
-		// Guard Clauses
+		// Guard Clauses: Prevent reviewing old or already processed apps
 		if (!$application->isCurrentYear()) {
 			return back()->withErrors(['year' => 'Не можете да прегледувате апликации од претходни години.']);
 		}
@@ -56,7 +75,7 @@ class ApplicationController extends Controller
 		$data = $request->validated();
 
 		try {
-			// Transaction to ensure the DB update is solid
+			// Update application status within a transaction for data integrity
 			DB::transaction(function () use ($data, $application) {
 				$application->update([
 					'status'         => $data['decision'],
@@ -66,33 +85,44 @@ class ApplicationController extends Controller
 				]);
 			});
 
-			// Email Notification (Non-critical)
+			// Send notification email
 			try {
 				Mail::to($application->email)->send(new ApplicationReviewed($application));
-			} catch (\Throwable $e) {
-				// report() so external monitors see it, and add context
-				report($e);
-				Log::warning("Email failed for application #{$application->id}", [
-					'email' => $application->email,
-					'error' => $e->getMessage()
+
+				// SUCCESS LOG: Confirms the email was sent (or queued)
+				Log::info("Application review email sent to: {$application->email}", [
+					'application_id' => $application->id,
+					'status'         => $application->status,
+					'admin_id'       => Auth::id(),
 				]);
+			} catch (\Throwable $e) {
+				// ERROR LOG: Specifically for mail failures
+				Log::error("Failed to send review email to: {$application->email}", [
+					'application_id' => $application->id,
+					'error'          => $e->getMessage()
+				]);
+				report($e);
 			}
 
 			$statusMk = $data['decision'] === 'approved' ? 'одобрена' : 'одбиена';
 
 			return redirect()->route('admin.applications.pending')
 				->with('success', "Апликацијата на {$application->name} {$application->surname} е {$statusMk}.");
-		} catch (\Exception $e) {
-			// Handle critical DB failures
+		} catch (\Throwable $e) {
+			Log::withContext(['admin_id' => Auth::id(), 'target_application' => $application->id]);
 			report($e);
-			return back()->withErrors(['error' => 'Настана грешка при зачувување на промените. Ве молиме обидете се повторно.']);
+
+			return back()->withInput()->withErrors(['error' => 'Настана грешка при зачувување на промените. Ве молиме обидете се повторно.']);
 		}
 	}
 
 	/**
-	 * All applications - searchable list for admin reference.
+	 * Display a paginated list of all artist applications (Active and Pending).
+	 *
+	 * @param Request $request
+	 * @return View
 	 */
-	public function all(Request $request)
+	public function all(Request $request): View
 	{
 		$search = $request->input('search');
 
@@ -103,5 +133,24 @@ class ApplicationController extends Controller
 			->withQueryString();
 
 		return view('admin.applications.all', compact('applications', 'search'));
+	}
+
+	/**
+	 * Soft-delete an artist application.
+	 * * Note: This triggers the 'deleted' event in the Model, 
+	 * which automatically clears the dashboard cache.
+	 *
+	 * @param ArtistApplication $application
+	 * @return RedirectResponse
+	 */
+	public function destroy(ArtistApplication $application): RedirectResponse
+	{
+		try {
+			$application->delete();
+			return back()->with('success', 'Апликацијата е успешно избришана.');
+		} catch (\Throwable $e) {
+			report($e);
+			return back()->withErrors(['error' => 'Настана грешка при бришењето.']);
+		}
 	}
 }

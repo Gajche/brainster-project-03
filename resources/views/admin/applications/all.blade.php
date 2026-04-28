@@ -6,14 +6,14 @@
 @section('content')
 
 {{-- SEARCH SECTION --}}
-<form method="GET" action="{{ route('admin.applications.pending') }}" class="mb-4">
+<form method="GET" action="{{ route('admin.applications.all') }}" class="mb-4">
     <div class="input-group w-100" style="max-width:420px;">
         <input type="text" name="search" class="form-control" placeholder="Пребарај..." value="{{ $search ?? '' }}">
         <button type="submit" class="btn btn-primary">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         @if($search)
-            <a href="{{ route('admin.applications.pending') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.applications.all') }}" class="btn btn-outline-secondary">
                 <i class="fa-solid fa-xmark me-1"></i> Откажи
             </a>
         @endif
@@ -51,8 +51,20 @@
                             </span>
                         </td>
                         <td class="small text-muted">{{ $app->created_at->format('d.m.Y') }}</td>
-                        <td>
-                            <a href="{{ route('admin.applications.show', $app) }}" class="btn btn-sm btn-outline-primary">Прегледај</a>
+                        <td class="text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ route('admin.applications.show', $app) }}" class="btn btn-sm btn-outline-primary">
+                                    Прегледај
+                                </a>
+                                
+                                <form action="{{ route('admin.applications.destroy', $app) }}" method="POST" onsubmit="return confirm('Дали сте сигурни дека сакате да ја избришете оваа апликација?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty
@@ -92,7 +104,17 @@
                 </div>
             </div>
 
-            <a href="{{ route('admin.applications.show', $app) }}" class="btn btn-primary w-100">Прегледај апликација</a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('admin.applications.show', $app) }}" class="btn btn-primary grow">Прегледај</a>
+                
+                <form action="{{ route('admin.applications.destroy', $app) }}" method="POST" onsubmit="return confirm('Избриши?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
     @empty

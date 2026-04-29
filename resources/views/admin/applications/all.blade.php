@@ -124,8 +124,9 @@
     @endforelse
 </div>
 
+{{-- Pagination --}}
 <div class="mt-3">
-    {{ $applications->links() }}
+    {{ $applications->links('pagination::bootstrap-5') }}
 </div>
 
 @endsection

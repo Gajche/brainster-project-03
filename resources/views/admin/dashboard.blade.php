@@ -77,4 +77,11 @@
 <div class="alert alert-info">Нема одобрени апликации.</div>
 @endforelse
 
+{{-- Call to Action Button --}}
+<div class="text-center mt-4 mb-0">
+    <a href="{{ route('admin.applications.all') }}" class="btn btn-primary px-4 shadow-sm">
+        <i class="fas fa-list-ul me-2"></i> Види ги сите апликации
+    </a>
+</div>
+
 @endsection

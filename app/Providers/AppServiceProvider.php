@@ -3,12 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
-
-
-use Illuminate\Support\Facades\Mail;
-use Symfony\Component\Mailer\Transport;
-use Symfony\Component\Mailer\Transport\Dsn;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,16 +20,10 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		// Force HTTPS on Railway (production)
-		if (config('app.env') === 'production') {
-			URL::forceScheme('https');
-		}
 
-		// Brevo mailer
-		Mail::extend('brevo', function () {
-			return Transport::fromDsn(
-				'brevo+api://default:' . env('BREVO_API_KEY') . '@default'
-			);
-		});
+		// Bootstrap
+		Paginator::useBootstrapFive();
+		// Tailwind
+		Paginator::useTailwind();
 	}
 }

@@ -53,6 +53,7 @@ class DashboardController extends Controller
 			$approvedByYear = ArtistApplication::approved()
 				->orderByDesc('year')
 				->orderByDesc('created_at')
+				->limit(20)
 				->get()
 				->groupBy('year');
 

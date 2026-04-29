@@ -109,7 +109,7 @@
             </div>
           </div>
 
-          <div class="mb-8">
+          {{-- <div class="mb-8">
             <label for="portfolio" class="block text-sm font-semibold text-ev-dark mb-2">Прикачи портфолио и кратка биографија</label>
             <input type="file" id="portfolio" name="portfolio" accept="application/pdf,.pdf" class="hidden">
             <x-ui.button type="button" variant="secondary" id="choose-file-btn">
@@ -118,7 +118,43 @@
             @error('portfolio')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
-          </div>
+          </div> --}}
+
+					{{-- Portfolio Section: File OR URL --}}
+					<div class="mb-10">
+						<label class="block text-sm font-semibold text-ev-dark mb-4">Твоето портфолио (PDF фајл или линк)</label>
+						
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-end">
+							{{-- PDF Upload --}}
+							<div>
+								<label for="portfolio" class="block text-xs font-medium text-gray-500 mb-2 italic">Прикачи фајл:</label>
+								<input type="file" id="portfolio" name="portfolio" accept="application/pdf,.pdf" class="hidden">
+								<x-ui.button type="button" variant="secondary" id="choose-file-btn" class="w-full">
+									<span id="file-label" class="text-sm">Одбери PDF</span>
+								</x-ui.button>
+								@error('portfolio')
+									<p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+								@enderror
+							</div>
+
+							{{-- Portfolio URL --}}
+							<div>
+								<label for="portfolio_url" class="block text-xs font-medium text-gray-500 mb-2 italic">ИЛИ внеси линк (Behance, Portfolio...):</label>
+								<input type="url" id="portfolio_url" name="portfolio_url" 
+											class="input-underline" 
+											value="{{ old('portfolio_url') }}" 
+											placeholder="https://...">
+								@error('portfolio_url')
+									<p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+								@enderror
+							</div>
+						</div>
+						
+						{{-- Hint text for the artist --}}
+						<p class="text-[10px] text-gray-400 mt-3 text-center sm:text-left">
+							* Задолжително е да прикачите фајл или да внесете валиден линк до вашето портфолио.
+						</p>
+					</div>
 
           <div class="flex justify-center">
             <x-ui.button type="submit" id="submit-btn">Испрати</x-ui.button>

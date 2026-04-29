@@ -19,6 +19,7 @@ class ArtistApplication extends Model
 		'collaboration_area',
 		'message',
 		'portfolio_path',
+		'portfolio_url',
 		'year',
 		'status',
 		'admin_response',

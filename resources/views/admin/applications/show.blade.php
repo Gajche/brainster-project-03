@@ -59,14 +59,28 @@
                     <dt class="col-sm-4 text-muted small"><i class="fa-solid fa-clock me-2"></i>Пријавен</dt>
                     <dd class="col-sm-8">{{ $application->created_at->format('d.m.Y H:i') }}</dd>
 
-                    @if($application->portfolio_path)
-                        <dt class="col-sm-4 text-muted small"><i class="fa-solid fa-file-pdf me-2"></i>Портфолио</dt>
-                        <dd class="col-sm-8">
-                            <a href="{{ asset('storage/' . $application->portfolio_path) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Отвори PDF
-                            </a>
-                        </dd>
-                    @endif
+										{{-- Portfolio Section: Handles both File and Link --}}
+										@if($application->portfolio_path)
+												<dt class="col-sm-4 text-muted small">
+														<i class="fa-solid fa-file-pdf me-2 text-danger"></i>Портфолио (PDF)
+												</dt>
+												<dd class="col-sm-8 mb-3">
+														<a href="{{ asset('storage/' . $application->portfolio_path) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+																<i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Отвори PDF
+														</a>
+												</dd>
+										@endif
+
+										@if($application->portfolio_url)
+												<dt class="col-sm-4 text-muted small">
+														<i class="fa-solid fa-link me-2 text-info"></i>Портфолио (Линк)
+												</dt>
+												<dd class="col-sm-8">
+														<a href="{{ $application->portfolio_url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info">
+																<i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Отвори линк
+														</a>
+												</dd>
+										@endif
 
                     @if($application->admin_response)
                         <div class="col-12"><hr class="my-3 text-muted opacity-25"></div>

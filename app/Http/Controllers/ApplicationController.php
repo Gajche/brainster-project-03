@@ -39,8 +39,18 @@ class ApplicationController extends Controller
 			 * Stores the file in storage/app/public/uploads and saves the 
 			 * path to be stored in the database.
 			 */
+			// if ($request->hasFile('portfolio')) {
+			// 	$data['portfolio_path'] = $request->file('portfolio')->store('uploads', 'public');
+			// }
+
+			// Handle File Upload if it exists
 			if ($request->hasFile('portfolio')) {
 				$data['portfolio_path'] = $request->file('portfolio')->store('uploads', 'public');
+			}
+
+			// Handle URL (Validation already ensured it's a valid URL)
+			if ($request->filled('portfolio_url')) {
+				$data['portfolio_url'] = $request->input('portfolio_url');
 			}
 
 			// Set system-generated fields

@@ -25,6 +25,7 @@ return new class extends Migration
 			$table->string('collaboration_area', 255);
 			$table->text('message');
 			$table->string('portfolio_path', 500)->nullable();
+			$table->string('portfolio_url', 500)->nullable();
 
 			// Submission year
 			$table->unsignedSmallInteger('year');

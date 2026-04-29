@@ -22,8 +22,12 @@ class StoreArtistApplicationRequest extends FormRequest
 			'social_media'       => 'nullable|url|max:500',
 			'collaboration_area' => 'required|string|max:255',
 			'message'            => 'required|string|max:5000',
-			// Only PDF files; max 10MB
-			'portfolio'          => 'nullable|file|mimes:pdf|max:10240',
+			// Only PDF files; max 2MB
+			// Portfolio File: Required ONLY IF portfolio_url is empty
+			'portfolio' => 'required_without:portfolio_url|nullable|file|mimes:pdf|max:2048',
+
+			// Portfolio URL: Required ONLY IF portfolio is empty
+			'portfolio_url' => 'required_without:portfolio|nullable|url|max:255',
 		];
 	}
 

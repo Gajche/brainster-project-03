@@ -101,7 +101,7 @@ git clone https://git.brainster.co/Dejan.Nikolovski-FS21/brainster-project-3.git
 cd your-folder
 ```
 
-## Quick Start (Recommended)
+## One Click Setup (Recommended)
 
 ### Windows
 
@@ -122,19 +122,31 @@ chmod +x setup.sh   # Only needed once
 
 ```
 
-### Both scripts will automatically:
+### Both setup scripts automatically:
 
-- Install dependencies (if missing)
-- Create/configure .env
-- Generate app key
-- Install Laravel Breeze
+- Install Composer dependencies (if missing)
 - Install NPM dependencies
+- Create `.env` from `.env.example`
+- Configure database credentials
+- Configure Mailpit SMTP
+- Generate Laravel application key
+- Install Laravel Breeze (if missing)
 - Build frontend assets
-- Run migrations + seed initial data
-- Start the server
+- Run migrations + fresh seed
+- Seed default admin account
+- Create storage symlink
+- Clear Laravel caches
+- Start development services automatically:
+    - `php artisan serve`
+    - `php artisan queue:work`
+    - `npm run dev`
+    - `Mailpit`
 
 **After setup finishes, open:**
 **http://127.0.0.1:8000**
+
+> ⚡ The setup scripts open additional terminal windows/tabs for development services.
+> Keep them running while developing/testing.
 
 ## Manual setup
 
@@ -170,10 +182,12 @@ DB_USERNAME=root
 DB_PASSWORD=your_password
 ```
 
-Then create the database (OPTIONAL):
+(OPTIONAL) Create the database:
 
 ```bash
-mysql -u root -p -e "CREATE DATABASE evolucija_na_sonot CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+# Redundant, create db in step 6 via migrations
+
+mysql -u root -p -e "CREATE DATABASE db_evolucija_na_sonot_nikolovski_dejan CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
 ### 5. Configure Mailpit (local email testing)
@@ -194,7 +208,10 @@ MAIL_FROM_NAME="Еволуција на Сонот"
 ### 6. Run migrations and seed the admin user
 
 ```bash
-php artisan migrate #type yes when prompted if db is not created already
+# type yes when prompted, to create db (if db is not created already)
+php artisan migrate
+
+# admin seeder
 php artisan db:seed --class=AdminUserSeeder
 ```
 
@@ -255,16 +272,43 @@ For production:
 npm run build
 ```
 
-For local development (with hot reload):
+### 10. Start development services
+
+Open separate terminals:
+
+```bash
+php artisan serve
+```
+
+```bash
+php artisan queue:work
+```
 
 ```bash
 npm run dev
 ```
 
-### 10. Start the development server
-
 ```bash
-php artisan serve
+mailpit
+```
+
+> Queue worker processes outgoing emails and background jobs.
+> Keep it running during development.
+
+---
+
+### (OPTIONAL) Add Mailpit Local Folder Support
+
+```
+project-root/mailpit/mailpit.exe
+```
+
+### Optional Local Mailpit Setup
+
+Instead of installing Mailpit globally, you may place it inside:
+
+```
+project-root/mailpit/
 ```
 
 The app will be available at [http://localhost:8000](http://localhost:8000).
@@ -277,7 +321,7 @@ The app will be available at [http://localhost:8000](http://localhost:8000).
 
 Install **Mailpit** for local email testing (recommended replacement for Mailtrap):
 
-1. Download from: https://github.com/axllent/mailpit/releases/latest  
+1. Download from: https://github.com/axllent/mailpit/releases/latest
    `mailpit-windows-amd64.zip`
 2. Extract `mailpit.exe` to e.g. `C:\mailpit`
 3. Run in a separate terminal (keep it open):
@@ -291,6 +335,16 @@ C:\mailpit\mailpit.exe
 
 All outgoing emails (application confirmations, admin approval/rejection notifications) will appear in the Mailpit inbox.
 Password reset link will appear in the Mailpit inbox as well.
+
+---
+
+### Local Development URLs
+
+| Service | URL                         |
+| ------- | --------------------------- |
+| App     | http://127.0.0.1:8000       |
+| Admin   | http://127.0.0.1:8000/admin |
+| Mailpit | http://localhost:8025       |
 
 ---
 
@@ -548,8 +602,6 @@ You can use the default credentials listed to explore the admin panel.
 
 ---
 
----
-
 ## Security Notes
 
 - CSRF protection on all forms
@@ -558,6 +610,147 @@ You can use the default credentials listed to explore the admin panel.
 - PDF-only file uploads enforced on both frontend (JS) and backend (Laravel validation + MIME check)
 - Year restriction enforced server-side - admins cannot action past-year applications
 - All errors handled with `try-catch` blocks and `Log::error()` logging
+
+---
+
+## Screenshots
+
+<details>
+<summary>Click to expand screenshots (images showcasing the application)</summary>
+
+<table width="100%">
+
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/home/home-desktop.png" alt="home-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>home-desktop-view</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/art-city/art-city-desktop.png" alt="art-city-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>art-city-desktop</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/blog/blog-desktop.png" alt="blog-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>blog-desktop</em>
+    </td>
+		<td align="center" valign="top">
+      <img src="screenshot/work-with-us/work-with-us-desktop.png" alt="work-with-us-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>work-with-us-desktop</em>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/home/home-tablet.png" alt="home-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>home-tablet</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/art-city/art-city-tablet.png" alt="art-city-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>art-city-tablet</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/blog/blog-tablet.png" alt="blog-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>blog-tablet</em>
+    </td>
+		<td align="center" valign="top">
+      <img src="screenshot/work-with-us/work-with-us-tablet.png" alt="work-with-us-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>work-with-us-tablet</em>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/home/home-mobile.png" alt="home-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>home-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/art-city/art-city-mobile-425.png" alt="art-city-mobil" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>art-city-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/blog/blog-mobile-425.png" alt="blog-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>blog-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/work-with-us/work-with-us-mobile.png" alt="work-with-us-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>work-with-us-mobile</em>
+    </td>
+  </tr>
+</table>
+
+<table width="100%">
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-dashboard-desktop.png" alt="admin-dashboard-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-dashboard-desktop</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-desktop.png" alt="admin-pending-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-desktop</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-all-applications-desktop.png" alt="admin-all-applications-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-all-applications-desktop</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-details-desktop.png" alt="admin-pending-details-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-details-desktop</em>
+    </td>
+		 <td align="center" valign="top">
+      <img src="screenshot/admin/admin-profile-desktop.png" alt="admin-profile-desktop" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-profile-desktop</em>
+    </td>
+  </tr>
+	
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-dashboard-tablet.png" alt="admin-dashboard-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-dashboard-tablet</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-tablet.png" alt="admin-pending-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-tablet</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-all-applications-tablet.png" alt="admin-all-applications-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-all-applications-tablet</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-details-tablet.png" alt="admin-pending-details-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-details-tablet</em>
+    </td>
+		 <td align="center" valign="top">
+      <img src="screenshot/admin/admin-profile-tablet.png" alt="admin-profile-tablet" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-profile-tablet</em>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-dashboard-mobile.png" alt="admin-dashboard-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-dashboard-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-mobile.png" alt="admin-pending-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-all-applications-mobile.png" alt="admin-all-applications-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-all-applications-mobile</em>
+    </td>
+    <td align="center" valign="top">
+      <img src="screenshot/admin/admin-pending-details-mobile.png" alt="admin-pending-details-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-pending-details-mobile</em>
+    </td>
+    	 <td align="center" valign="top">
+      <img src="screenshot/admin/admin-profile-mobile.png" alt="admin-profile-mobile" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+      <br><em>admin-profile-mobile</em>
+    </td>
+  </tr>
+
+</table>
+
+</details>
 
 ---
 

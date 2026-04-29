@@ -69,12 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const marker = L.marker(loc.coords).addTo(map);
 
             // Optional: Popup still works if someone clicks twice or wants detail
-            marker.bindPopup(`
-                <div class="p-1">
-                    <strong class="text-ev-dark block border-b mb-1 uppercase">${loc.name}</strong>
-                    <p class="text-sm text-gray-600 m-0">${loc.description}</p>
-                </div>
-            `);
+            // marker.bindPopup(`
+            //     <div class="p-1">
+            //         <strong class="text-ev-dark block border-b mb-1 uppercase">${loc.name}</strong>
+            //         <p class="text-sm text-gray-600 m-0">${loc.description}</p>
+            //     </div>
+            // `);
 
             // DYNAMIC LABEL LOGIC
             marker.on("click", function () {

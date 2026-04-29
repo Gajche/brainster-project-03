@@ -20,7 +20,7 @@
                 Кавадарци<br>5-15 Август
             </div> --}}
 
-						<div id="map-label" class="absolute top-4 right-4 bg-white/95 px-3 py-2 rounded-lg font-bold text- text-right  z-100 shadow-sm border border-gray-100 transition-all duration-300">
+						<div id="map-label" class="absolute top-4 right-4 bg-white/80 px-3 py-2 rounded-lg font-bold text- text-right text-sm md:text-base z-100 shadow-sm border border-gray-100 transition-all duration-300">
                 За детали,<br>одбери локација
 						</div>
 

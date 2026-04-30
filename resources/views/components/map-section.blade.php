@@ -10,7 +10,7 @@
     </div>
 
     <div class="relative z-30 max-w-7xl mx-auto px-6">
-        <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-8">
+        <h2 class="text-lg md:text-2xl font-bold uppercase text-center text-ev-dark mb-8">
             Мапа
         </h2>
 

@@ -30,21 +30,13 @@
 
 		<div class="relative w-full flex flex-col lg:bg-transparent lg:p-0 pt-8 md:pt-16 px-6 pb-0 xxs:mt-30 xs:mt-34 md:mt-100 lg:mt-0 lg:-translate-y-10">
 
-			{{-- <div class="absolute inset-0 lg:hidden xs:block xxs:block -z-10 mx-0 px-0">
-				<img src="{{ asset('storage/images/bg-mobile-home-white.svg') }}"
-					class="w-full h-full object-fill"
-					alt="bg-mobile"
-					loading="lazy"
-					decoding="async">
-			</div> --}}
-
 			{{-- Tablet SVG Background --}}
 			<div class="absolute inset-0 hidden md:block xs:block lg:hidden -z-10 mx-0 px-0">
 				@include('partials.svg.ipad-bg')
 			</div>
 
 			{{-- Text content --}}
-			<p class="hidden lg:block uppercase font-bold text-ev-dark mb-4">
+			<p class="hidden lg:block uppercase text-lg font-bold text-ev-dark mb-4">
 				Редефинирај ја реалноста
 			</p>
 
@@ -81,7 +73,7 @@
 		<div class="flex">
 			<div class="ml-auto w-full lg:w-[60%]">
 
-				<h2 class="text-2xl font-semibold mb-6 uppercase text-ev-dark">
+				<h2 class="text-2xl font-bold mb-6 uppercase text-ev-dark">
 					ЗА НАС
 				</h2>
 
@@ -191,7 +183,7 @@
     </div>
 
     <div class="relative z-20 max-w-7xl mx-auto px-6">
-        <h2 class="text-lg lg:text-xl font-bold uppercase text-center text-ev-dark mb-20">
+        <h2 class="text-lg md:text-2xl font-bold uppercase text-center text-ev-dark mb-20">
             Претходни настани
         </h2>
 
@@ -283,7 +275,7 @@
 	<div class="relative z-20 max-w-7xl mx-auto px-6">
 
 		<div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center mb-12">
-			<h2 class="text-lg lg:text-xl font-bold uppercase text-ev-dark">
+			<h2 class="text-lg md:text-2xl font-bold uppercase text-ev-dark">
 				Најнови објави од Инстаграм
 			</h2>
 			<x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank" rel="noopener">

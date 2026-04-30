@@ -41,11 +41,11 @@
 
 {{-- НАШАТА ВИЗИЈА --}}
 <section class="relative py-10 lg:py-20 bg-cream">
-    <div class="relative z-20 max-w-4xl mx-auto px-6 text-start lg:text-center">
-        <h2 class="text-3xl lg:text-lg font-bold uppercase text-ev-dark mb-6">
+    <div class="relative z-20 max-w-5xl mx-auto px-6 text-start lg:text-center">
+        <h2 class="text-3xl md:text-2xl font-bold uppercase text-ev-dark mb-6">
             Нашата визија
         </h2>
-        <p class="text-base text-ev-dark">
+        <p class="text-lg text-ev-dark">
             Еволуција на сонот 4 е уметнички и културен фестивал замислен да се одвива во срцето на централна Македонија, Кавадарци како природна точка на поврзување помеѓу локалната заедница и меѓународната културна сцена. Преку современи уметнички форми, интердисциплинарни програми и меѓународни соработки, фестивалот има за цел да поттикне културен дијалог и да придонесе кон развојот на културниот туризам во, фестивалот создава простор за културна размена и современо уметничко изразување.
         </p>
     </div>
@@ -65,13 +65,13 @@
     <div class="relative z-20 max-w-7xl mx-auto px-6">
         <div class="relative max-w-5xl mx-auto min-h-112.5 flex flex-col items-center justify-center bg-ev-blue-light rounded-[40px] px-8 py-6 lg:bg-transparent lg:rounded-none lg:px-0 lg:py-6">
 
-            <h2 class="relative z-30 text-3xl md:text-xl font-bold uppercase text-center text-ev-dark mb-8 lg:mb-10">
+            <h2 class="relative z-30 text-3xl md:text-2xl font-bold uppercase text-center text-ev-dark mb-8 lg:mb-10">
                 Програма
             </h2>
 
             {{-- Background SVG --}}
             <div class="absolute inset-0 z-0 hidden lg:flex lg:items-center lg:justify-center">
-                <img src="{{ asset('storage/images/program-sub.svg') }}" alt="" class="w-full h-full object-contain">
+                <img src="{{ asset('storage/images/program-sub.svg') }}" alt="program-sub" class="w-full h-full object-contain">
             </div>
 
             <div class="relative z-30 w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
@@ -103,7 +103,7 @@
 {{-- УМЕТНИЦИ --}}
 <section class="relative py-20 bg-cream">
     <div class="relative z-20 max-w-7xl mx-auto px-6">
-        <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-12">
+        <h2 class="text-lg md:text-2xl font-bold uppercase text-center text-ev-dark mb-12">
             Запознај ги уметниците
         </h2>
 
@@ -140,7 +140,7 @@
 {{-- ШТО МОЖЕШ ДА ОЧЕКУВАШ --}}
 <section class="pt-20 pb-40 bg-cream relative">
     <div class="max-w-7xl mx-auto px-6 relative z-20">
-        <h2 class="text-lg font-bold uppercase text-center text-ev-dark mb-10">
+        <h2 class="text-lg md:text-2xl font-bold uppercase text-center text-ev-dark mb-10">
             Што можеш да очекуваш
         </h2>
 

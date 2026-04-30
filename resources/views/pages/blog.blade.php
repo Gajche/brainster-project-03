@@ -14,7 +14,7 @@
     </div>
 
     <div class="relative z-20 max-w-7xl mx-auto px-6 ">
-        <h2 class="text-lg lg:text-3xl font-semibold uppercase text-center text-ev-dark mb-16">
+        <h2 class="text-lg lg:text-2xl font-semibold uppercase text-center text-ev-dark mb-16">
             Најнови новости
         </h2>
 
@@ -73,7 +73,7 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-20">
-        <h2 class="text-center text-lg lg:text-3xl font-bold uppercase text-ev-dark mb-12">
+        <h2 class="text-center text-lg md:text-2xl font-bold uppercase text-ev-dark mb-12">
             Погледни што се случуваше изминатите години
         </h2>
 
@@ -136,7 +136,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-20">
-        <h2 class="text-xl md:text-3xl font-bold uppercase mb-6 text-ev-dark">
+        <h2 class="text-xl md:text-2xl font-bold uppercase mb-6 text-ev-dark">
             Сакаш да бидеш дел од нашиот колектив?
         </h2>
         <x-ui.button href="{{ route('work-with-us') }}">Пријави се</x-ui.button>

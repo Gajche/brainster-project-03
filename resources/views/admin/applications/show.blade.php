@@ -62,11 +62,12 @@
 										{{-- Portfolio Section: Handles both File and Link --}}
 										@if($application->portfolio_path)
 												<dt class="col-sm-4 text-muted small">
-														<i class="fa-solid fa-file-pdf me-2 text-danger"></i>Портфолио (PDF)
+														<i class="fa-solid fa-file-export @if(Str::endsWith($application->portfolio_path, '.pdf')) text-danger @else text-primary @endif me-2"></i>
+														Портфолио (Фајл)
 												</dt>
 												<dd class="col-sm-8 mb-3">
 														<a href="{{ asset('storage/' . $application->portfolio_path) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-																<i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Отвори PDF
+																<i class="fa-solid fa-download me-1"></i> Преземи / Отвори фајл
 														</a>
 												</dd>
 										@endif

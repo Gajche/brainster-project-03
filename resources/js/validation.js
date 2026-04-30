@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const areaInput = document.getElementById("collaboration_area");
     const messageInput = document.getElementById("message");
     const portfolioInput = document.getElementById("portfolio");
+    const portfolioUrlInput = document.getElementById("portfolio_url");
     const fileLabel = document.getElementById("file-label");
     const submitBtn = document.getElementById("submit-btn");
 
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function clearError(field) {
+        if (!field) return;
         field.classList.remove("field-invalid", "field-valid");
         const existing = field.parentNode.querySelector('[data-error="true"]');
         if (existing) existing.remove();
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         field.classList.add("field-valid");
     }
 
-    // PDF file chooser
+    // File chooser logic for PDF, DOC, DOCX
     const chooseFileBtn = document.getElementById("choose-file-btn");
     if (chooseFileBtn && portfolioInput) {
         chooseFileBtn.addEventListener("click", function (e) {
@@ -45,31 +47,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
         portfolioInput.addEventListener("change", function () {
             if (portfolioInput.files.length === 0) {
-                if (fileLabel) fileLabel.textContent = "Choose File";
+                if (fileLabel) fileLabel.textContent = "Одбери фајл";
+                clearError(portfolioInput);
                 return;
             }
             const file = portfolioInput.files[0];
+            const fileName = file.name.toLowerCase();
 
-            if (
-                !file.name.toLowerCase().endsWith(".pdf") ||
-                file.type !== "application/pdf"
-            ) {
-                showError(portfolioInput, "Само PDF датотеки се дозволени.");
-                if (fileLabel) fileLabel.textContent = "Choose File";
-                portfolioInput.value = "";
-                return;
-            }
-            if (file.size > 10 * 1024 * 1024) {
+            const isAllowed =
+                fileName.endsWith(".pdf") ||
+                fileName.endsWith(".doc") ||
+                fileName.endsWith(".docx");
+
+            if (!isAllowed) {
                 showError(
                     portfolioInput,
-                    "Датотеката не смее да биде поголема од 10MB.",
+                    "Дозволени се PDF, DOC и DOCX датотеки.",
                 );
-                if (fileLabel) fileLabel.textContent = "Choose File";
+                if (fileLabel) fileLabel.textContent = "Одбери фајл";
                 portfolioInput.value = "";
                 return;
             }
+
+            if (file.size > 2 * 1024 * 1024) {
+                showError(
+                    portfolioInput,
+                    "Датотеката не смее да биде поголема од 2MB.",
+                );
+                if (fileLabel) fileLabel.textContent = "Одбери фајл";
+                portfolioInput.value = "";
+                return;
+            }
+
             markValid(portfolioInput);
             if (fileLabel) fileLabel.textContent = file.name;
+            if (portfolioUrlInput) clearError(portfolioUrlInput);
         });
     }
 
@@ -77,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function validateAll() {
         let valid = true;
 
+        // Name & Surname
         if (!nameInput || nameInput.value.trim().length < 2) {
             if (nameInput)
                 showError(nameInput, "Внесете го вашето име (мин. 2 знаци).");
@@ -93,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
             markValid(surnameInput);
         }
 
+        // Email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
             if (emailInput) showError(emailInput, "Внесете валидна е-пошта.");
@@ -101,29 +115,35 @@ document.addEventListener("DOMContentLoaded", function () {
             markValid(emailInput);
         }
 
-        if (phoneInput && phoneInput.value.trim() !== "") {
-            const phoneRegex = /^[0-9\+\-\s\(\)]{6,20}$/;
-            if (!phoneRegex.test(phoneInput.value.trim())) {
-                showError(phoneInput, "Внесете валиден телефонски број.");
-                valid = false;
-            } else {
-                markValid(phoneInput);
-            }
-        }
+        // Portfolio Logic
+        const hasFile = portfolioInput && portfolioInput.files.length > 0;
+        const hasUrl =
+            portfolioUrlInput && portfolioUrlInput.value.trim().length > 0;
 
-        if (socialInput && socialInput.value.trim() !== "") {
+        // Only validate URL format if something is typed
+        if (hasUrl) {
             try {
-                new URL(socialInput.value.trim());
-                markValid(socialInput);
+                new URL(portfolioUrlInput.value.trim());
+                markValid(portfolioUrlInput);
             } catch {
-                showError(
-                    socialInput,
-                    "Внесете валиден URL за социјалната мрежа.",
-                );
+                showError(portfolioUrlInput, "Внесете валиден линк (URL).");
                 valid = false;
+            }
+        } else {
+            clearError(portfolioUrlInput);
+        }
+
+        // Keep file marked valid if one is selected, otherwise clear
+        if (hasFile) {
+            markValid(portfolioInput);
+        } else {
+            // Only clear if there isn't already an error from the "change" listener
+            if (!portfolioInput.classList.contains("field-invalid")) {
+                clearError(portfolioInput);
             }
         }
 
+        // Collaboration Area & Message
         if (!areaInput || areaInput.value.trim().length < 3) {
             if (areaInput)
                 showError(areaInput, "Внесете ја областа на соработка.");
@@ -146,11 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return valid;
     }
 
-    // Submit
+    // Submit Handler
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (!validateAll()) {
-            // Tailwind class already highlights errors, just scroll to the first one
             const firstError = form.querySelector(".field-invalid");
             if (firstError)
                 firstError.scrollIntoView({
@@ -166,13 +185,18 @@ document.addEventListener("DOMContentLoaded", function () {
         form.submit();
     });
 
-    // Blur validation
-    [nameInput, surnameInput, emailInput, areaInput, messageInput].forEach(
-        function (field) {
-            if (!field) return;
-            field.addEventListener("blur", function () {
-                validateAll();
-            });
-        },
-    );
+    // Real-time validation on blur
+    [
+        nameInput,
+        surnameInput,
+        emailInput,
+        areaInput,
+        messageInput,
+        portfolioUrlInput,
+    ].forEach(function (field) {
+        if (!field) return;
+        field.addEventListener("blur", function () {
+            validateAll();
+        });
+    });
 });

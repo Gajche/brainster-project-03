@@ -122,15 +122,15 @@
 
 					{{-- Portfolio Section: File OR URL --}}
 					<div class="mb-10">
-						<label class="block text-sm font-semibold text-ev-dark mb-4">Твоето портфолио (PDF фајл или линк)</label>
+						<label class="block text-sm font-semibold text-ev-dark mb-4">Твоето портфолио (фајл или линк)</label>
 						
 						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-end">
 							{{-- PDF Upload --}}
 							<div>
 								<label for="portfolio" class="block text-xs font-medium text-gray-500 mb-2 italic">Прикачи фајл:</label>
-								<input type="file" id="portfolio" name="portfolio" accept="application/pdf,.pdf" class="hidden">
+								<input type="file" id="portfolio" name="portfolio" accept=".pdf,.doc,.docx" class="hidden">
 								<x-ui.button type="button" variant="secondary" id="choose-file-btn" class="w-full">
-									<span id="file-label" class="text-sm">Одбери PDF</span>
+									<span id="file-label" class="text-sm">Одбери</span>
 								</x-ui.button>
 								@error('portfolio')
 									<p class="text-red-500 text-xs mt-1">{{ $message }}</p>

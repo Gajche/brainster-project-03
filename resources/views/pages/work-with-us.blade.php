@@ -109,23 +109,12 @@
             </div>
           </div>
 
-          {{-- <div class="mb-8">
-            <label for="portfolio" class="block text-sm font-semibold text-ev-dark mb-2">Прикачи портфолио и кратка биографија</label>
-            <input type="file" id="portfolio" name="portfolio" accept="application/pdf,.pdf" class="hidden">
-            <x-ui.button type="button" variant="secondary" id="choose-file-btn">
-              <span id="file-label">Choose File</span>
-            </x-ui.button>
-            @error('portfolio')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div> --}}
-
 					{{-- Portfolio Section: File OR URL --}}
 					<div class="mb-10">
-						<label class="block text-sm font-semibold text-ev-dark mb-4">Твоето портфолио (фајл или линк)</label>
+						<label for="portfolio" class="block text-sm font-semibold text-ev-dark mb-4">Твоето портфолио (фајл или линк)</label>
 						
 						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-end">
-							{{-- PDF Upload --}}
+							{{-- File Upload --}}
 							<div>
 								<label for="portfolio" class="block text-xs font-medium text-gray-500 mb-2 italic">Прикачи фајл:</label>
 								<input type="file" id="portfolio" name="portfolio" accept=".pdf,.doc,.docx" class="hidden">
@@ -163,10 +152,6 @@
       </div>
     </div>
   </div>
-
-  {{-- <div class="hidden lg:block absolute right-[0%] bottom-0 w-[25%] pointer-events-none z-0">
-    @include('partials.svg.work-with-us-blob')
-  </div> --}}
 
 	<div class="decorative-wrapper">
     <div class="decorative-svg wwu-blob-pos">

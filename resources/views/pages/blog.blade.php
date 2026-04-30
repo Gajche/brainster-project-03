@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="relative z-20 max-w-7xl mx-auto px-6 qhd:max-w-[1980px]">
+    <div class="relative z-20 max-w-7xl mx-auto px-6 ">
         <h2 class="text-lg lg:text-3xl font-semibold uppercase text-center text-ev-dark mb-16">
             Најнови новости
         </h2>
@@ -113,7 +113,7 @@
                         @foreach($edition['paragraphs'] as $text) <p>{{ $text }}</p> @endforeach
                     </div>
                     <div class="mt-8">
-                        <x-ui.button href="#">Повеќе →</x-ui.button>
+                        <x-ui.button href="https://www.instagram.com/evolucija.na.sonot/" target="_blank">Повеќе →</x-ui.button>
                     </div>
                 </div>
             </div>

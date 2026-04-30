@@ -388,3 +388,9 @@
         display: none !important;
     }
 }
+
+/* MAP */
+/* Rotates blue to red using CSS filters */
+.red-pin {
+    filter: hue-rotate(140deg) brightness(90%) saturate(150%);
+}

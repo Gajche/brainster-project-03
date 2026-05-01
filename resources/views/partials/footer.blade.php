@@ -1,4 +1,4 @@
-<footer class="bg-white border-t-4 border-gray-400 lg:py-6 xs:py-3 relative overflow-visible z-10">
+<footer class="bg-white border-t-4 border-gray-400 lg:py-5 xs:py-3 relative overflow-visible z-10">
 
 	<div class="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
 
@@ -8,7 +8,7 @@
 		</div>
 
 		{{-- Contact --}}
-		<div class="flex items-center gap-2 text-sm text-ev-dark text-center md:text-center lg:ml-30 md:ml-20">
+		<div class="flex items-center gap-2 text-base text-ev-dark text-center md:text-center lg:ml-30 md:ml-20">
 			<!-- <span class="hidden md:inline text-gray-400">|</span> -->
 			<span>
 				| Контактирај не

@@ -20,8 +20,8 @@
 
 @theme {
     /* Custom Colors */
-    --color-cream: #f5f0e8;
-    /* --color-cream: #ffffff; */
+    /* --color-cream: #f5f0e8; */
+    --color-cream: #ffffff;
     --color-ev-blue: #3a6fd8;
     --color-ev-blue-dark: #2a5abf;
     --color-ev-blue-light: #c8d8f5;
@@ -184,8 +184,8 @@
         /* Desktop (1024, 1440, 2560+) */
         .dandelion-footer-wrap {
             /* padding-left: 0px; */
-            top: -60px;
-            width: 90px;
+            top: -54px;
+            width: 84px;
         }
     }
 }

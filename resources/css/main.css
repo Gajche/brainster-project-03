@@ -277,9 +277,8 @@
 }
 
 /* DECORATIVE SVG */
-
 @media (min-width: 1024px) {
-    /* Prevents horizontal scroll/swipe on desktop and tablets */
+    /* Prevents horizontal scroll/swipe */
     section {
         overflow-x: clip;
     }
@@ -290,7 +289,7 @@
         pointer-events: none;
         z-index: 10;
         width: 100%;
-        max-width: 1280px; /* Matches your max-w-7xl */
+        max-width: 1280px;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -386,6 +385,43 @@
 @media (max-width: 1023px) {
     .decorative-wrapper {
         display: none !important;
+    }
+}
+
+/* DECORATIVE SVG MOBILE */
+/* Blob Mobile */
+.decorative-wrapper-mobile {
+    display: none;
+}
+
+/* 320px and 425px */
+@media (min-width: 320px) and (max-width: 425px) {
+    section {
+        overflow-x: clip;
+        position: relative;
+    }
+
+    .decorative-wrapper-mobile {
+        display: block;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .decorative-svg-mobile {
+        position: absolute;
+        height: auto;
+    }
+
+    /* HOME SECTION */
+    .blob-mobile-pos {
+        right: -100px;
+        top: -140px;
+        width: 300px;
     }
 }
 

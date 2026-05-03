@@ -69,6 +69,20 @@
       </div>
   </div>
 
+	{{-- Layered Decorative SVG Mobile --}}
+	{{-- <div class="absolute decorative-wrapper-mobile md:hidden right-0 -top-30 w-50">
+      <div class="decorative-svg blob-mobile-pos">
+          @include('partials.svg.blueblob')
+      </div>
+  </div> --}}
+
+		{{-- Layered Decorative SVG Mobile --}}
+	<div class="decorative-wrapper-mobile">
+      <div class="decorative-svg-mobile blob-mobile-pos">
+          @include('partials.svg.blueblob')
+      </div>
+  </div>
+
 	<div class="relative z-20 max-w-7xl mx-auto px-6 md:px-12">
 		<div class="flex">
 			<div class="ml-auto w-full lg:w-[60%]">
